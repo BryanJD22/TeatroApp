@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.teatroapp.DetallesActivity;
 import com.example.teatroapp.R;
 import com.example.teatroapp.SalasActivity;
 import com.example.teatroapp.beans.Obra;
@@ -61,7 +62,7 @@ public class UObrasAdapter extends RecyclerView.Adapter<UObrasAdapter.ViewHolder
                 .into(holder.pic);
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(holder.itemView.getContext(), SalasActivity.class);
+            Intent intent = new Intent(holder.itemView.getContext(), DetallesActivity.class);
             intent.putExtra("idObra", String.valueOf(lstObras.get(position).getIdObra()));
             context.startActivity(intent);
         });

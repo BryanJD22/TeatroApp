@@ -60,6 +60,7 @@ public class ServletTeatro extends HttpServlet {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+                break;
 
         }
 

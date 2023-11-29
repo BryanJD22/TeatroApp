@@ -204,8 +204,8 @@ public class ObraDAO implements DAO<Obra,Integer>{
         return lstObras;
     }
 
-    public ArrayList<Obra> findIdObra(int idObra) {
-        String sql = "SELECT * FROM obra WHERE id_obra = " + idObra;
+    public ArrayList<Obra>  findIdObra(int idObra) {
+        String sql = "SELECT * FROM obra WHERE id_obra =" + idObra;
         System.out.println(sql);
         ArrayList<Obra> obraById = new ArrayList<>();
 

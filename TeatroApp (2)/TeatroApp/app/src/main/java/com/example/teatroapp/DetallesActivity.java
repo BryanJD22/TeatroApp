@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     private RecyclerView recyclerViewCategorias;
 
     ArrayList<Categoria> lstCategorias = new ArrayList<>();
+    ArrayList<Obra> datosObra = new ArrayList<>();
     private int idObra, idUser;
 
     private String tituloObraV;
@@ -48,19 +50,23 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
+        initView();
+
 
         idObra = getIntent().getIntExtra("idObra",0);
         tituloObraV = getIntent().getStringExtra("tituloObra");
         idUser = getIntent().getIntExtra("idUser", 0);
         presenter = new ValorarPresenter(this);
-        presenter.getObraById(String.valueOf(idObra));
+
 
         categoriaspresenter = new CategoriaPresenter(this);
         categoriaspresenter.getCategoriasPorObra(String.valueOf(idObra));
 
-        initView();
 
+        presenter.getObraById(String.valueOf(idObra));
+        sendRequestObras(datosObra);
 
+        presenter.getValoraciones();
 
 
         obraValoracionTxt.setOnClickListener(v -> {
@@ -93,19 +99,26 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void sendRequestObras(ArrayList<Obra> lstObras) {
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transform(new CenterCrop(), new RoundedCorners(30));
-        Obra obra = lstObras.get(0);
+        if (lstObras != null && !lstObras.isEmpty()) {
+            this.datosObra = lstObras;
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions = requestOptions.transform(new CenterCrop(), new RoundedCorners(30));
+            Obra obra = lstObras.get(0);
 
-        tituloObra.setText(obra.getTituloObra());
-        Glide.with(DetallesActivity.this)
-                .load(obra.getImagenObra())
-                .apply(requestOptions)
-                .placeholder(R.drawable.sukuna)
-                .into(pic2);
-        //obraValoracionTxt.setText();
-        duracionTxt.setText(obra.getDuracionMin());
-        descObra.setText(obra.getDescripcionObra());
+            tituloObra.setText(obra.getTituloObra());
+            Glide.with(DetallesActivity.this)
+                    .load(obra.getImagenObra())
+                    .apply(requestOptions)
+                    .placeholder(R.drawable.sukuna)
+                    .into(pic2);
+            // obraValoracionTxt.setText();
+            duracionTxt.setText(String.valueOf(obra.getDuracionMin()));
+            descObra.setText(obra.getDescripcionObra());
+        } else {
+            // Manejar el caso en el que la lista esté vacía
+            // Por ejemplo, mostrar un mensaje de error o tomar alguna acción predeterminada.
+            Log.e("DetallesActivity", "La lista de obras está vacía");
+        }
 
     }
 

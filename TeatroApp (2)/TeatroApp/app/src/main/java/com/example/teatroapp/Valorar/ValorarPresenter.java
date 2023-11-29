@@ -29,7 +29,6 @@ public class ValorarPresenter implements ValorarContract.Presenter{
 
             @Override
             public void getObrasByid(ArrayList<Obra> lstObras) {
-
                 vista.sendRequestObras(lstObras);
             }
 

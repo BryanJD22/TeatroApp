@@ -63,7 +63,7 @@ public class UObrasAdapter extends RecyclerView.Adapter<UObrasAdapter.ViewHolder
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), DetallesActivity.class);
-            intent.putExtra("idObra", String.valueOf(lstObras.get(position).getIdObra()));
+            intent.putExtra("idObra", lstObras.get(position).getIdObra());
             intent.putExtra("tituloObra", lstObras.get(position).getTituloObra());
             intent.putExtra("idUser", idUser);
 

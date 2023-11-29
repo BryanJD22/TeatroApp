@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
 
     private Button btnPuntuar;
 
+    TextView valorarTitulo;
+
     ValorarPresenter presenter;
 
     @SuppressLint("MissingInflatedId")
@@ -31,9 +34,13 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_valorar);
 
+        presenter = new ValorarPresenter(this);
+
         idObra = getIntent().getIntExtra("idObra",0);
         tituloObraV = getIntent().getStringExtra("tituloObra");
         idUser = getIntent().getIntExtra("idUser", 0);
+
+        valorarTitulo = findViewById(R.id.valorarTitulo);
 
         edtPuntuacion = findViewById(R.id.edtPuntuacion);
 

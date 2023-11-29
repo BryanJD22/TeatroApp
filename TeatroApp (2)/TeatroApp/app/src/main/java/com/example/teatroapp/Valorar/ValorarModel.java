@@ -36,7 +36,7 @@ public class ValorarModel implements ValorarContract.Model{
                         OnLstValoracionesListener.onFailure("Fallo: Login");
                     }
                 }else{
-                    Log.d("Bryan Error", "1");
+                    Log.d("Bryan Error", "Response no es succesful");
                 }
             }
             @Override

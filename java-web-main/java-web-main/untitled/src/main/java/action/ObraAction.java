@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ObraAction implements IAction{
+public class  ObraAction implements IAction{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String pagDestino = "";

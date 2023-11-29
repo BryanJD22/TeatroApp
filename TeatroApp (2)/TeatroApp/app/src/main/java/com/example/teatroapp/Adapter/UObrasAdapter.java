@@ -25,11 +25,11 @@ import java.util.ArrayList;
 
 public class UObrasAdapter extends RecyclerView.Adapter<UObrasAdapter.ViewHolder> {
     private ArrayList<Obra> lstObras;
-
+    private int idUser;
     Context context;
 
-    public UObrasAdapter(ArrayList<Obra> lstObras) {
-
+    public UObrasAdapter(ArrayList<Obra> lstObras, int idUser) {
+        this.idUser = idUser;
         this.lstObras = lstObras;
     }
 
@@ -64,6 +64,9 @@ public class UObrasAdapter extends RecyclerView.Adapter<UObrasAdapter.ViewHolder
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), DetallesActivity.class);
             intent.putExtra("idObra", String.valueOf(lstObras.get(position).getIdObra()));
+            intent.putExtra("tituloObra", lstObras.get(position).getTituloObra());
+            intent.putExtra("idUser", idUser);
+
             context.startActivity(intent);
         });
     }

@@ -78,4 +78,33 @@ public class CategoriaModel implements CategoriaContract.Model{
     }
 
 
+    public void getCategoriasPorObra(String idObra, OnLstCategoriaListener onLstCategoriaListener) {
+
+        ApiCategoria apiCategoria = ApiTeatro.getClient().create(ApiCategoria.class);
+        //petición asíncrona.
+        Call<ArrayList<Categoria>> call = apiCategoria.lst_categoriasByObra("Categoria.BYOBRA", idObra);
+        call.enqueue(new Callback<ArrayList<Categoria>>() {
+            public void onResponse(Call<ArrayList<Categoria>> call, Response<ArrayList<Categoria>> response) {
+                if(response.isSuccessful()){
+                    ArrayList<Categoria> categorias = response.body();// Aquí tengo el JSON
+                    if(categorias!=null) {
+                        onLstCategoriaListener.onFinished(categorias);
+
+                    }else{
+                        Log.d("Bryan Error", "1");
+                        onLstCategoriaListener.onFailure("Fallo: Obra Por categoria");
+                    }
+                }else{
+                    Log.d("Bryan Error", "1");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Categoria>> call, Throwable t) {
+
+                Log.e("Retrofit Error", "Failed to make obras request", t);
+                onLstCategoriaListener.onFailure("Failed to retrieve obras: " + t.getMessage());
+            }
+        });
+
+    }
 }

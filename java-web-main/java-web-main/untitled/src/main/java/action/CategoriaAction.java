@@ -22,10 +22,20 @@ public class CategoriaAction implements IAction{
             case "FIND_ALL":
                 pagDestino = findAll(request, response);
                 break;
-
+            case "BYOBRA":
+                pagDestino = porObra(request, response);
+                break;
 
         }
         return pagDestino;
+    }
+
+    private String porObra(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        String idObra = request.getParameter("IDOBRA");
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        ArrayList<Categoria> lstCategoria = categoriaDAO.porObra(Integer.parseInt(idObra));
+
+        return Categoria.toArrayJson(lstCategoria);
     }
 
     private String findAll(HttpServletRequest request, HttpServletResponse response) throws SQLException {

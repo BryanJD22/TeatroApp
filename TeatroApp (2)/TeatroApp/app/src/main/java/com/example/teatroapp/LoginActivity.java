@@ -104,10 +104,13 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if (isAdministrador(userId)) {
             // Caso de administrador
             Intent adminIntent = new Intent(LoginActivity.this, SalasActivity.class);
+            adminIntent.putExtra("idUser", userId);
+
             startActivity(adminIntent);
         } else {
             //Caso Usuario
             Intent userIntent = new Intent(LoginActivity.this, UserActivity.class);
+            userIntent.putExtra("idUser", userId);
             startActivity(userIntent);
         }
 

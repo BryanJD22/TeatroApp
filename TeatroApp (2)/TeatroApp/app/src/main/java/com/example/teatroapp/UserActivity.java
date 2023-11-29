@@ -28,6 +28,8 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
     ArrayList<Obra> lstobras = new ArrayList<>();
     ArrayList<Categoria> lstCategorias = new ArrayList<>();
 
+    int idUser;
+
     private ObraPresenter lstObrasPresenter;
 
     private CategoriaPresenter lstCategoriasPresenter;
@@ -40,6 +42,7 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        idUser = getIntent().getIntExtra("idUser",0);
         initView();
         lstObrasPresenter = new ObraPresenter(this);
 
@@ -71,7 +74,7 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
         recyclerViewTopVentas = findViewById(R.id.topVentas);
         loading1.setVisibility(View.GONE);
 
-        adapterTopVentas = new UObrasAdapter(lstObrasTopVentas);
+        adapterTopVentas = new UObrasAdapter(lstObrasTopVentas,idUser);
         recyclerViewTopVentas.setAdapter(adapterTopVentas);
 
 
@@ -83,7 +86,7 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
         recyclerViewTopVentas = findViewById(R.id.topPopular);
         loading2.setVisibility(View.GONE);
 
-        adapterTopPopular = new UObrasAdapter(lstObrasTopPopular);
+        adapterTopPopular = new UObrasAdapter(lstObrasTopPopular,idUser);
         recyclerViewTopVentas.setAdapter(adapterTopPopular);
 
 
@@ -116,7 +119,7 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
         recyclerViewAll = findViewById(R.id.allObras);
         loading3.setVisibility(View.GONE);
 
-        adapterAll = new UObrasAdapter(lstObras);
+        adapterAll = new UObrasAdapter(lstObras,idUser);
         recyclerViewAll.setAdapter(adapterAll);
 
     }

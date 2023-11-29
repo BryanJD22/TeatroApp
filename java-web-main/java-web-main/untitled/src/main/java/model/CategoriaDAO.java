@@ -56,4 +56,34 @@ public class CategoriaDAO implements DAO<Categoria,Integer> {
         motosSql.desconectar();
         return lstCategorias;
     }
+
+    public ArrayList<Categoria> porObra(int idObra) throws SQLException {
+        String sql = "SELECT * FROM CATEGORIA WHERE id_obra = "+ idObra;
+        ArrayList<Categoria> lstCategorias = new ArrayList<>();
+
+        motosSql.conectar();
+        ResultSet rs = motosSql.consultar(sql);
+
+
+        try {
+            while (rs.next()) {
+                Categoria categoria = new Categoria(
+                        rs.getInt("id_categoria"),
+                        rs.getString("nombre_categoria")
+
+                );
+
+                lstCategorias.add(categoria);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        motosSql.desconectar();
+        return lstCategorias;
+    }
+
+
+
 }

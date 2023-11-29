@@ -5,28 +5,41 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.teatroapp.Adapter.CategoriasAdapter;
+import com.example.teatroapp.Categorias.CategoriaContract;
+import com.example.teatroapp.Categorias.CategoriaPresenter;
 import com.example.teatroapp.Valorar.ValorarContract;
 import com.example.teatroapp.Valorar.ValorarPresenter;
+import com.example.teatroapp.beans.Categoria;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.Valoracion;
 
 import java.util.ArrayList;
 
-public class DetallesActivity extends AppCompatActivity implements ValorarContract.View {
+public class DetallesActivity extends AppCompatActivity implements ValorarContract.View, CategoriaContract.View {
     private TextView tituloObra, obraValoracionTxt, duracionTxt, descObra;
     private ProgressBar progressBar;
     private NestedScrollView scrollView;
-    private ImageView pic2, backImg;
+    private ImageView pic2, backImg, valorarStar;
     private RecyclerView recyclerViewCategorias;
-    private int idObra;
+
+    ArrayList<Categoria> lstCategorias = new ArrayList<>();
+    private int idObra, idUser;
+
+    private String tituloObraV;
     ValorarPresenter presenter;
 
+    CategoriaPresenter categoriaspresenter;
     private RecyclerView.Adapter adaptercategorias;
 
     private RecyclerView  recyclerViewCategoria;
@@ -37,9 +50,26 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         setContentView(R.layout.activity_detalles);
 
         idObra = getIntent().getIntExtra("idObra",0);
+        tituloObraV = getIntent().getStringExtra("tituloObra");
+        idUser = getIntent().getIntExtra("idUser", 0);
         presenter = new ValorarPresenter(this);
         presenter.getObraById(String.valueOf(idObra));
+
+        categoriaspresenter = new CategoriaPresenter(this);
+        categoriaspresenter.getCategoriasPorObra(String.valueOf(idObra));
+
         initView();
+
+
+
+
+        obraValoracionTxt.setOnClickListener(v -> {
+            Intent intent = new Intent(DetallesActivity.this, ValorarActivity.class);
+            intent.putExtra("tituloObraV", tituloObraV);
+            intent.putExtra("idObra", idObra);
+            intent.putExtra("idUser", idUser);
+            startActivity(intent);
+        });
     }
 
 
@@ -50,6 +80,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         scrollView = findViewById(R.id.scrollView2);
         pic2 = findViewById(R.id.picDetail);
         obraValoracionTxt = findViewById(R.id.obraValoracion);
+
         duracionTxt = findViewById(R.id.duracionDetalles);
         descObra = findViewById(R.id.descDetalles);
         backImg = findViewById(R.id.backImg);
@@ -62,18 +93,23 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void sendRequestObras(ArrayList<Obra> lstObras) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transform(new CenterCrop(), new RoundedCorners(30));
         Obra obra = lstObras.get(0);
 
         tituloObra.setText(obra.getTituloObra());
+        Glide.with(DetallesActivity.this)
+                .load(obra.getImagenObra())
+                .apply(requestOptions)
+                .placeholder(R.drawable.sukuna)
+                .into(pic2);
         //obraValoracionTxt.setText();
         duracionTxt.setText(obra.getDuracionMin());
         descObra.setText(obra.getDescripcionObra());
 
-        if (obra.getCategoria() != null) {
-            //adaptercategorias = new CategoriasAdapter(obra.getCategoria());
-            recyclerViewCategoria.setAdapter(adaptercategorias);
-        }
     }
+
+
 
     @Override
     public void sucessLstValoraciones(ArrayList<Valoracion> lstValoraciones) {
@@ -82,6 +118,25 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void failureListValoraciones(String message) {
+
+    }
+
+    @Override
+    public void sucessListCategorias(ArrayList<Categoria> lstcategoria) {
+        this.lstCategorias = lstcategoria;
+        recyclerViewCategorias = findViewById(R.id.categoriaDetalles);
+        adaptercategorias = new CategoriasAdapter(lstcategoria);
+        recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCategoria.setAdapter(adaptercategorias);
+    }
+
+    @Override
+    public void failureListCategoria(String message) {
+
+    }
+
+    @Override
+    public void successListObrasPorCategoria(ArrayList<Obra> lstObras) {
 
     }
 }

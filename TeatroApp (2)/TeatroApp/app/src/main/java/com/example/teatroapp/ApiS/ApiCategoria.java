@@ -16,4 +16,7 @@ public interface ApiCategoria {
 
     @GET("ServletTeatro")
     Call<ArrayList<Obra>> lst_obras_categoria(@Query("ACTION") String action, @Query("CATEGORIA") String categoria);
+
+    @GET("ServletTeatro")
+    Call<ArrayList<Categoria>> lst_categoriasByObra(@Query("ACTION") String action, @Query("IDOBRA") String idObra);
 }

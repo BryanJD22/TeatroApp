@@ -1,9 +1,13 @@
 package model;
 
+import beans.Obra;
 import beans.Valoracion;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ValorarDAO implements DAO<Valoracion,Integer> {
     MotorSQL motosSql;
@@ -37,6 +41,38 @@ public class ValorarDAO implements DAO<Valoracion,Integer> {
 
     @Override
     public ArrayList<Valoracion> findAll() throws SQLException {
+
+
+
         return null;
     }
+
+    public ArrayList<Valoracion> valoracionObra(Valoracion valoracion) throws SQLException {
+
+        String sql = "SELECT AVG(valoracion) AS valoracion FROM valoracion WHERE id_obra = " + valoracion.getIdObra();
+        System.out.println(sql);
+        ArrayList<Valoracion> valoracions = new ArrayList<>();
+        motosSql.conectar();
+        ResultSet rs = motosSql.consultar(sql);
+
+        try {
+            while (rs.next()) {
+                Valoracion valoracion1 = new Valoracion(rs.getDouble("valoracion")
+
+                );
+
+                valoracions.add(valoracion1);
+                Valoracion.toArrayJson(valoracions);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ObraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        return valoracions;
+    }
+
+
+
+
 }

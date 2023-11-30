@@ -76,6 +76,36 @@ public class ValorarModel implements ValorarContract.Model{
             }
         });
     }
+
+    public void getValoraciones(String idObra, OnLstValoracionesListener OnLstValoracionesListener) {
+        /*Ejecuto Webservice con retrofit*/
+        ApiValorar apiValorar = ApiTeatro.getClient().create(ApiValorar.class);
+        //petición asíncrona.
+        Call<ArrayList<Valoracion>> call = apiValorar.getValoraciones("Valorar.VALORACIONOBRA", idObra);
+        call.enqueue(new Callback<ArrayList<Valoracion>>() {
+            public void onResponse(Call<ArrayList<Valoracion>> call, Response<ArrayList<Valoracion>> response) {
+                if(response.isSuccessful()){
+                    ArrayList<Valoracion> valoraciones = response.body();// Aquí tengo el JSON
+                    if(valoraciones!=null) {
+                        OnLstValoracionesListener.onFinished(valoraciones);
+
+                    }else{
+                        Log.d("Bryan Error", "1");
+                        OnLstValoracionesListener.onFailure("Fallo: Login");
+                    }
+                }else{
+                    Log.d("Bryan Error", "Response no es succesful");
+                }
+            }
+
+            public void onFailure(Call<ArrayList<Valoracion>> call, Throwable t) {
+
+                Log.e("Retrofit Error", "Failed to make obras request", t);
+                OnLstValoracionesListener.onFailure("Failed to retrieve obras: " + t.getMessage());
+            }
+        });
+    }
+
     @Override
     public void getValoracionesService(OnLstValoracionesListener OnLstValoracionesListener) {
 

@@ -15,7 +15,7 @@ public interface ValorarContract {
         void failureListValoraciones(String message);
     }
     public interface Presenter{
-        void getValoraciones();//la original
+        void getValoraciones(String idObra);//la original
 
     }
     public interface Model{
@@ -26,6 +26,8 @@ public interface ValorarContract {
             void onFailure(String error);
         }
         void getValoracionesService(ValorarContract.Model.OnLstValoracionesListener OnLstValoracionesListener);
+
+
     }
 }
 

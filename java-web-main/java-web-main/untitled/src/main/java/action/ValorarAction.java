@@ -30,20 +30,20 @@ public class ValorarAction implements IAction{
         return pagDestino;
     }
 
-    private String valoracionObra(HttpServletRequest request, HttpServletResponse response) {
+    private String valoracionObra(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         ValorarDAO valorarDAO = new ValorarDAO();
         int id_obra = Integer.parseInt(request.getParameter("IDOBRA"));
         Valoracion valoracion = new Valoracion(id_obra);
 
-        //ArrayList<Valoracion> valoracionObra = new ValorarDAO().
-
-        return null;
+        ArrayList<Valoracion> valoracionObra1 = new ValorarDAO().valoracionObra(valoracion);
+        System.out.println(Valoracion.toArrayJson(valoracionObra1));
+        return Valoracion.toArrayJson(valoracionObra1);
     }
 
 
     private String valorar(HttpServletRequest request, HttpServletResponse response) {
         ValorarDAO valorarDAO = new ValorarDAO();
-        int valoracion = Integer.parseInt(request.getParameter("VALORACION"));
+        double valoracion = Double.parseDouble(request.getParameter("VALORACION"));
         int id_obra = Integer.parseInt(request.getParameter("IDOBRA"));
         int id_user = Integer.parseInt(request.getParameter("IDUSER"));
         Valoracion valoracion1 = new Valoracion(valoracion,id_obra,id_user);

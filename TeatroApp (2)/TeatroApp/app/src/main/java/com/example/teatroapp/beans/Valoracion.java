@@ -8,24 +8,28 @@ import java.util.ArrayList;
 
 public class Valoracion {
     private int idValoracion;
-    private int valoracion;
+    private double valoracion;
     private int idObra;
     private int idUsuario;
     private Timestamp fechaCreacion;
     private Timestamp fechaModificacion;
 
     public Valoracion() {
+
     }
 
+    public Valoracion(double valoracion) {
+        this.valoracion = valoracion;
+    }
 
-    public Valoracion(int idValoracion, int valoracion, int idObra, int idUsuario) {
+    public Valoracion(int idValoracion, double valoracion, int idObra, int idUsuario) {
         this.idValoracion = idValoracion;
         this.valoracion = valoracion;
         this.idObra = idObra;
         this.idUsuario = idUsuario;
     }
 
-    public Valoracion(int valoracion, int idObra, int idUsuario) {
+    public Valoracion(double valoracion, int idObra, int idUsuario) {
         this.valoracion = valoracion;
         this.idObra = idObra;
         this.idUsuario = idUsuario;
@@ -40,7 +44,7 @@ public class Valoracion {
         this.idValoracion = idValoracion;
     }
 
-    public int getValoracion() {
+    public double getValoracion() {
         return valoracion;
     }
 

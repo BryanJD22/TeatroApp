@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_color"
     tools:context=".ObrasActivity">
 
 
@@ -15,22 +16,21 @@
             android:orientation="horizontal"
             tools:ignore="MissingConstraints" />
 
-
-
-
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addbtnObras"
         style="@android:style/Widget.Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_edittext"
+        android:layout_width="267dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/custom_edittext_register"
         android:gravity="bottom"
         android:text="Añadir obra"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
         card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

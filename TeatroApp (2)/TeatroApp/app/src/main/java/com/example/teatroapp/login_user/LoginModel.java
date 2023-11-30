@@ -54,6 +54,7 @@ public class LoginModel implements LoginContract.Model{
         /*Ejecuto Webservice con retrofit*/
         ApiUsers apiUsers = ApiTeatro.getClient().create(ApiUsers.class);
         //petición asíncrona.
+
         Call<ArrayList<Usuario>> call = apiUsers.login2("User.LOGIN", user.getEmail(), user.getPassword());
         call.enqueue(new Callback<ArrayList<Usuario>>() {
             public void onResponse(Call<ArrayList<Usuario>> call,Response<ArrayList<Usuario>> response) {

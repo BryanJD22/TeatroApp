@@ -41,6 +41,8 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     private String tituloObraV;
     ValorarPresenter presenter;
 
+    ArrayList<Valoracion> valoraciones = new ArrayList<>();
+
     CategoriaPresenter categoriaspresenter;
     private RecyclerView.Adapter adaptercategorias;
 
@@ -66,7 +68,9 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         presenter.getObraById(String.valueOf(idObra));
         sendRequestObras(datosObra);
 
-        presenter.getValoraciones();
+        presenter.getValoraciones(String.valueOf(idObra));
+
+
 
 
         obraValoracionTxt.setOnClickListener(v -> {
@@ -126,6 +130,14 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void sucessLstValoraciones(ArrayList<Valoracion> lstValoraciones) {
+
+
+        if (!lstValoraciones.isEmpty()) {
+            Valoracion valoracion = lstValoraciones.get(0); // Assuming you are getting a single Valoracion
+            obraValoracionTxt.setText(String.valueOf(valoracion.getValoracion())); // Assuming there's a method like getRating() in Valoracion class
+        } else {
+            obraValoracionTxt.setText("No hay valoraciones hechas");
+        }
 
     }
 

@@ -52,7 +52,7 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
                 String puntuacionText = edtPuntuacion.getText().toString();
 
                 if (validarPuntuacion(puntuacionText)) {
-                    int puntuacion = Integer.parseInt(puntuacionText);
+                    double puntuacion = Double.parseDouble(puntuacionText);
 
                     Valoracion valoracion = new Valoracion(puntuacion,idObra,idUser);
 
@@ -68,7 +68,7 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
     }
     private boolean validarPuntuacion(String puntuacionText) {
         try {
-            int puntuacion = Integer.parseInt(puntuacionText);
+            double puntuacion = Double.parseDouble(puntuacionText);
             return puntuacion >= 1 && puntuacion <= 5;
         } catch (NumberFormatException e) {
             return false;

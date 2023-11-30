@@ -16,7 +16,24 @@ public class ValorarPresenter implements ValorarContract.Presenter{
     }
 
     @Override
-    public void getValoraciones() {
+    public void getValoraciones(String idObra) {
+
+        this.modelo.getValoraciones(idObra, new ValorarContract.Model.OnLstValoracionesListener() {
+            @Override
+            public void onFinished(ArrayList<Valoracion> lstValoraciones) {
+                vista.sucessLstValoraciones(lstValoraciones);
+            }
+
+            @Override
+            public void getObrasByid(ArrayList<Obra> lstObras) {
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
 
     }
 
@@ -24,11 +41,12 @@ public class ValorarPresenter implements ValorarContract.Presenter{
         this.modelo.getObrasPorID(idObra, new ValorarContract.Model.OnLstValoracionesListener() {
             @Override
             public void onFinished(ArrayList<Valoracion> lstValoraciones) {
-
+                    vista.sucessLstValoraciones(lstValoraciones);
             }
 
             @Override
             public void getObrasByid(ArrayList<Obra> lstObras) {
+
                 vista.sendRequestObras(lstObras);
             }
 

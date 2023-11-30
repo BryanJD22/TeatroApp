@@ -26,8 +26,13 @@ public class ObraDAO implements DAO<Obra,Integer>{
                 + bean.getDescripcionObra() +"'," +bean.getDuracionMin()+ ","+bean.getPrecio()+")";
         System.out.println(sql);
         resp = motosSql.modificar(sql);
-        System.out.println(resp);
-        return resp;
+
+        ArrayList<Obra> idObra = new ArrayList<>();
+         idObra = obraPorTitulo(bean.getTituloObra());
+         Obra obra = idObra.get(0);
+
+        System.out.println(obra.getIdObra());
+        return obra.getIdObra();
     }
 
     @Override
@@ -231,6 +236,35 @@ public class ObraDAO implements DAO<Obra,Integer>{
 
         motosSql.desconectar();
         return obraById;
+    }
+
+    public ArrayList<Obra>  obraPorTitulo(String  tituloObra) {
+        String sql = "SELECT * FROM OBRA WHERE titulo_obra = '" + tituloObra + "'";
+        System.out.println(sql);
+
+        ArrayList<Obra> obraPorTitulo = new ArrayList<>();
+        motosSql.conectar();
+        ResultSet rs = motosSql.consultar(sql);
+
+        try {
+            while (rs.next()) {
+                Obra obra = new Obra(
+                        rs.getInt("id_obra"),
+                        rs.getString("titulo_obra"),
+                        rs.getString("descripcion_obra"),
+                        rs.getInt("duracion_min"),
+                        rs.getBigDecimal("precio"),
+                        rs.getString("imagen_obra")
+                );
+
+                obraPorTitulo.add(obra);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ObraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        motosSql.desconectar();
+        return obraPorTitulo;
     }
 
 }

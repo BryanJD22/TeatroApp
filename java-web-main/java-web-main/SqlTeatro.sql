@@ -63,7 +63,7 @@ CREATE TABLE compra (
 -- Tabla Valoracion
 CREATE TABLE valoracion (
     id_valoracion INT AUTO_INCREMENT PRIMARY KEY,
-    valoracion INT,
+    valoracion DOUBLE,
     id_obra INT,
     id_usuario INT,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

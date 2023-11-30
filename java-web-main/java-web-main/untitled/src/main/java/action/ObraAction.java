@@ -105,7 +105,7 @@ public class  ObraAction implements IAction{
         BigDecimal precioObra = new BigDecimal(precio);
         Obra obra = new Obra(tituloObra,desc, Integer.parseInt(duracion),precioObra);
         int respuesta = obraDAO.add(obra);
-        return "{\"lineas_afectadas\":"+respuesta+"}";
+        return "{\"Id obra\":"+respuesta+"}";
 
     }
 

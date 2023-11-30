@@ -24,6 +24,10 @@ public class Obra {
     public Obra() {
     }
 
+    public Obra(int idObra) {
+        this.idObra = idObra;
+    }
+
     public Obra(String tituloObra, String descripcionObra, int duracionMin, BigDecimal precio) {
         this.tituloObra = tituloObra;
         this.descripcionObra = descripcionObra;

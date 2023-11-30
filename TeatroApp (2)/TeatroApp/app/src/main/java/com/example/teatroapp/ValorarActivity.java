@@ -25,8 +25,11 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
     private Button btnPuntuar;
 
     TextView valorarTitulo;
+    String mensaje;
 
     ValorarPresenter presenter;
+
+    ArrayList<Valoracion> valoraciones = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,6 +49,8 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
 
         btnPuntuar = findViewById(R.id.btnPuntuar);
 
+        mensaje = "Ha ocurrido un problema pruebe otra vez más tarde";
+
         btnPuntuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +62,21 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
                     Valoracion valoracion = new Valoracion(puntuacion,idObra,idUser);
 
                     presenter.addValoracion(valoracion);
+                    sucessLstValoraciones(valoraciones);
 
                 } else {
+                    // Inflar el diseño personalizado del Toast
+                    View layout = getLayoutInflater().inflate(R.layout.toast_style, findViewById(R.id.toast_layout_style));
 
-                    Toast.makeText(ValorarActivity.this, "La valoracion tiene que estar entre 1 y 5", Toast.LENGTH_SHORT).show();
+                    // Configurar el texto del Toast (puedes personalizarlo según tus necesidades)
+                    TextView text = layout.findViewById(R.id.toast_text);
+                    text.setText("La valoracion tiene que ser entre 1 y 5");
+
+                    // Crear y mostrar el Toast personalizado
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
                 }
             }
         });
@@ -81,11 +97,35 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
 
     @Override
     public void sucessLstValoraciones(ArrayList<Valoracion> lstValoraciones) {
+        this.valoraciones = lstValoraciones;
+        // Inflar el diseño personalizado del Toast
+        View layout = getLayoutInflater().inflate(R.layout.toast_style, findViewById(R.id.toast_layout_style));
 
+        // Configurar el texto del Toast (puedes personalizarlo según tus necesidades)
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText("Valoración añadida correctamente");
+
+        // Crear y mostrar el Toast personalizado
+        Toast toast = new Toast(this);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 
     @Override
     public void failureListValoraciones(String message) {
+        this.mensaje = message;
+        // Inflar el diseño personalizado del Toast
+        View layout = getLayoutInflater().inflate(R.layout.toast_style, findViewById(R.id.toast_layout_style));
 
+        // Configurar el texto del Toast (puedes personalizarlo según tus necesidades)
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText(message);
+
+        // Crear y mostrar el Toast personalizado
+        Toast toast = new Toast(this);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

@@ -53,6 +53,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ObrasActivity.this, AddActivity.class);
+                    intent.putExtra("idSala", String.valueOf(idSala));
                     startActivity(intent);
                 }
             });

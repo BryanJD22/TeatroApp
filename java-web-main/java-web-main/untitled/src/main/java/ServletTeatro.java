@@ -47,6 +47,14 @@ public class ServletTeatro extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+
+            case "ObraSala":
+                try {
+                    out.print(new ObraSalaAction().execute(request,response));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             case "Categoria":
                 try {
                     out.print(new CategoriaAction().execute(request,response));

@@ -3,6 +3,7 @@ package com.example.teatroapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,12 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        Intent intent = getIntent();
+
+        String idSala = intent.getStringExtra("idSala");
+
+
+
         edtTituloObra = findViewById(R.id.tituloObra);
         edtDesc = findViewById(R.id.desc);
         //edtCategoria = findViewById(R.id.categoria);
@@ -61,6 +68,8 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
                 Log.d("VALORES", "Duración: " + obra.getDuracionMin());
                 Log.d("VALORES", "Precio: " + obra.getPrecio());
                 presenter.add(obra);
+
+
 
             }
         });

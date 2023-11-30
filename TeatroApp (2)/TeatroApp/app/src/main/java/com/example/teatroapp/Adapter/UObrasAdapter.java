@@ -66,6 +66,7 @@ public class UObrasAdapter extends RecyclerView.Adapter<UObrasAdapter.ViewHolder
             intent.putExtra("idObra", lstObras.get(position).getIdObra());
             intent.putExtra("tituloObra", lstObras.get(position).getTituloObra());
             intent.putExtra("idUser", idUser);
+            intent.putExtra("sourceAdapter", "UObrasAdapter");
 
             context.startActivity(intent);
         });

@@ -53,16 +53,24 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
         initView();
+        String sourceAdapter = getIntent().getStringExtra("sourceAdapter");
+        if ("AdapterObras".equals(sourceAdapter)) {
+            idObra = getIntent().getIntExtra("idObra",0);
+        } else if ("UObrasAdapter".equals(sourceAdapter)) {
+            idObra = getIntent().getIntExtra("idObra",0);
+            tituloObraV = getIntent().getStringExtra("tituloObra");
+            idUser = getIntent().getIntExtra("idUser", 0);
+        } else {
+
+        }
 
 
-        idObra = getIntent().getIntExtra("idObra",0);
-        tituloObraV = getIntent().getStringExtra("tituloObra");
-        idUser = getIntent().getIntExtra("idUser", 0);
         presenter = new ValorarPresenter(this);
 
 
         categoriaspresenter = new CategoriaPresenter(this);
         categoriaspresenter.getCategoriasPorObra(String.valueOf(idObra));
+
 
 
         presenter.getObraById(String.valueOf(idObra));
@@ -71,7 +79,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         presenter.getValoraciones(String.valueOf(idObra));
         sucessLstValoraciones(valoraciones);
 
-
+        sucessListCategorias(lstCategorias);
 
         obraValoracionTxt.setOnClickListener(v -> {
             Intent intent = new Intent(DetallesActivity.this, ValorarActivity.class);
@@ -94,8 +102,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         duracionTxt = findViewById(R.id.duracionDetalles);
         descObra = findViewById(R.id.descDetalles);
         backImg = findViewById(R.id.backImg);
-        recyclerViewCategorias = findViewById(R.id.categoriaDetalles);
-        recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
 
         backImg.setOnClickListener(v -> finish());
     }
@@ -148,11 +155,23 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void sucessListCategorias(ArrayList<Categoria> lstcategoria) {
-        this.lstCategorias = lstcategoria;
-        recyclerViewCategorias = findViewById(R.id.categoriaDetalles);
-        adaptercategorias = new CategoriasAdapter(lstcategoria);
-        recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewCategoria.setAdapter(adaptercategorias);
+        if (lstcategoria != null) {
+            this.lstCategorias = lstcategoria;
+            recyclerViewCategorias = findViewById(R.id.categoriaDetalles);
+            adaptercategorias = new CategoriasAdapter(lstcategoria);
+            recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+            // Asegúrate de que recyclerViewCategorias se haya inicializado correctamente antes de usarlo
+            if (recyclerViewCategorias != null) {
+                recyclerViewCategorias.setAdapter(adaptercategorias);
+            } else {
+                // Manejar la situación en la que recyclerViewCategorias es null
+                Log.e("Error", "recyclerViewCategorias es null");
+            }
+        } else {
+            // Manejar la situación en la que lstcategoria es null
+            Log.e("Error", "lstcategoria es null");
+        }
     }
 
     @Override

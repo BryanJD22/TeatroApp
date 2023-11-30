@@ -58,9 +58,12 @@ public class CategoriaDAO implements DAO<Categoria,Integer> {
     }
 
     public ArrayList<Categoria> porObra(int idObra) throws SQLException {
-        String sql = "SELECT * FROM CATEGORIA WHERE id_obra = "+ idObra;
+        String sql = "SELECT categoria.*\n" +
+                "FROM categoria\n" +
+                "INNER JOIN obra_categoria ON categoria.id_categoria = obra_categoria.id_categoria\n" +
+                "WHERE obra_categoria.id_obra = "+idObra+";";
         ArrayList<Categoria> lstCategorias = new ArrayList<>();
-
+        System.out.println(sql);
         motosSql.conectar();
         ResultSet rs = motosSql.consultar(sql);
 

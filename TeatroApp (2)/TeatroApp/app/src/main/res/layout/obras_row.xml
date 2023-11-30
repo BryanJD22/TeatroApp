@@ -51,6 +51,7 @@
                 android:id="@+id/Adesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/black"
                 android:layout_below="@+id/AtituloObra"
                 android:layout_toRightOf="@+id/Aimagen"

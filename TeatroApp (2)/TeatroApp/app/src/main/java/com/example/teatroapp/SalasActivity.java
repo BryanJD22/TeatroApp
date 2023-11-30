@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.teatroapp.Adapter.AdapterSalas;
 import com.example.teatroapp.Salas.SalaContract;
@@ -21,13 +23,16 @@ public class SalasActivity extends AppCompatActivity implements SalaContract.Vie
     private SalaPresenter lstSalasPresenter;
     private ArrayList<Sala> lstSalas;
 
-
+    private ImageView backimg;
     RecyclerView recyclerView;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_salas);
+        backimg = findViewById(R.id.backImgSalas);
+        backimg.setOnClickListener(v -> finish());
 
         lstSalasPresenter = new SalaPresenter(this);
 

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.teatroapp.Adapter.AdapterObras;
@@ -27,7 +28,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
     private Button agregarbtn;
     public AdapterObras adapterObras;
     private ObraPresenter lstObrasPresenter;
-
+    private ImageView backimg;
     private CategoriaPresenter lstCategoriaPresenter;
 
     private ArrayList<Obra> lstObras;
@@ -37,6 +38,8 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_obras);
+        backimg = findViewById(R.id.backImgObras);
+        backimg.setOnClickListener(v -> finish());
 
         lstObrasPresenter = new ObraPresenter(this);
         lstCategoriaPresenter = new CategoriaPresenter(this);
@@ -59,10 +62,12 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
             });
 
         } else if(intent.hasExtra("categoria")){
+
             String categoria = intent.getStringExtra("categoria");
             lstCategoriaPresenter.getObrasPorCategoria(categoria);
             agregarbtn = findViewById(R.id.addbtnObras);
             agregarbtn.setVisibility(View.GONE);
+
 
         }else {
             // Manejar el caso en el que no se proporcionó un ID de sala

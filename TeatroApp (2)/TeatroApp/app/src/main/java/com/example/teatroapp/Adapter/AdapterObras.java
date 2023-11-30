@@ -35,6 +35,7 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
     @NonNull
     @Override
     public AdapterObras.ObrasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View view = inflater.inflate(R.layout.obras_row, parent, false);
         return new ObrasViewHolder(view);
     }
@@ -48,7 +49,6 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
 
         holder.AtituloObra.setText(lstObras.get(posfila).getTituloObra());
 
-        //holder.Acategoria.setText(lstObras.get(posfila).getCategoria());
 
         holder.Adesc.setText(lstObras.get(posfila).getDescripcionObra());
         // Usa Picasso para cargar y mostrar la imagen
@@ -57,9 +57,10 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
                 .placeholder(R.drawable.pruebaimagentoji) // Reemplaza con tu recurso de imagen de carga
                 .into(holder.Aimagen);
 
-        holder.cardView.setOnClickListener(e->{
+        holder.itemView.setOnClickListener(e->{
             Intent intent = new Intent(holder.itemView.getContext(), DetallesActivity.class);
             intent.putExtra("idObra", String.valueOf(obra.getIdObra()));
+            intent.putExtra("sourceAdapter", "AdapterObras");
             context.startActivity(intent);
         });
 

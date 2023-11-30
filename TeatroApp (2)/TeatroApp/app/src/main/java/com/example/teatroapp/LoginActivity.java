@@ -10,6 +10,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.teatroapp.beans.Usuario;
 import com.example.teatroapp.login_user.LoginContract;
@@ -61,10 +63,22 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 if(comprobarEmail(valorEmail) && comprobarPass(valorPass)){
                     presenter.login2(user);
 
+                    View layout = getLayoutInflater().inflate(R.layout.toast_style, findViewById(R.id.toast_layout_style));
+                    // Configurar el texto del Toast (puedes personalizarlo según tus necesidades)
+                    TextView text = layout.findViewById(R.id.toast_text);
+                    text.setText("Login hecho");
+
+                    // Crear y mostrar el Toast personalizado
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
 
                 }
 
                 }
+
+
         });
 
 

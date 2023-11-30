@@ -62,7 +62,7 @@ public class ValorarDAO implements DAO<Valoracion,Integer> {
                 );
 
                 valoracions.add(valoracion1);
-                Valoracion.toArrayJson(valoracions);
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ObraDAO.class.getName()).log(Level.SEVERE, null, ex);

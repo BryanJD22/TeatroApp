@@ -11,6 +11,7 @@ import com.example.teatroapp.Salas.SalaContract;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.Valoracion;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -83,23 +84,28 @@ public class ValorarModel implements ValorarContract.Model{
         //petición asíncrona.
         Call<ArrayList<Valoracion>> call = apiValorar.getValoraciones("Valorar.VALORACIONOBRA", idObra);
         call.enqueue(new Callback<ArrayList<Valoracion>>() {
+            @Override
             public void onResponse(Call<ArrayList<Valoracion>> call, Response<ArrayList<Valoracion>> response) {
-                if(response.isSuccessful()){
-                    ArrayList<Valoracion> valoraciones = response.body();// Aquí tengo el JSON
-                    if(valoraciones!=null) {
+                if (response.isSuccessful()) {
+                    ArrayList<Valoracion> valoraciones = response.body();
+                    if (valoraciones != null) {
                         OnLstValoracionesListener.onFinished(valoraciones);
-
-                    }else{
-                        Log.d("Bryan Error", "1");
-                        OnLstValoracionesListener.onFailure("Fallo: Login");
+                    } else {
+                        Log.d("Bryan Error", "Response body is null");
+                        OnLstValoracionesListener.onFailure("Fallo: Response body is null");
                     }
-                }else{
-                    Log.d("Bryan Error", "Response no es succesful");
+                } else {
+                    try {
+                        Log.d("Bryan Error", "Error Response: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    OnLstValoracionesListener.onFailure("Fallo: Response unsuccessful");
                 }
             }
 
+            @Override
             public void onFailure(Call<ArrayList<Valoracion>> call, Throwable t) {
-
                 Log.e("Retrofit Error", "Failed to make obras request", t);
                 OnLstValoracionesListener.onFailure("Failed to retrieve obras: " + t.getMessage());
             }

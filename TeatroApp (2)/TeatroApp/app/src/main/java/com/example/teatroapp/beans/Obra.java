@@ -20,6 +20,10 @@ public class Obra {
     public Obra() {
     }
 
+    public Obra(int idObra) {
+        this.idObra = idObra;
+    }
+
     public Obra(int idObra, String tituloObra, String descripcionObra, int duracionMin, BigDecimal precio, String imagenObra) {
         this.idObra = idObra;
         this.tituloObra = tituloObra;

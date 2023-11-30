@@ -29,8 +29,9 @@ public class ObraSalaAction implements IAction{
 
     private String add(HttpServletRequest request, HttpServletResponse response) {
         ObraSalaDAO obraSalaDAO = new ObraSalaDAO();
-        String idSala = request.getParameter("IDSALA");
         String idObra = request.getParameter("IDOBRA");
+        String idSala = request.getParameter("IDSALA");
+
 
         ObraSala obraSala = new ObraSala(Integer.parseInt(idObra),Integer.parseInt(idSala));
 

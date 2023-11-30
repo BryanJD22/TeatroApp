@@ -32,6 +32,7 @@ public class ObraDAO implements DAO<Obra,Integer>{
          Obra obra = idObra.get(0);
 
         System.out.println(obra.getIdObra());
+        motosSql.desconectar();
         return obra.getIdObra();
     }
 

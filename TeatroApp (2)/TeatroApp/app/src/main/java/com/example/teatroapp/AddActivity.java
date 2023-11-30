@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.example.teatroapp.AddObras.AddContract;
 import com.example.teatroapp.AddObras.AddObraPresenter;
 import com.example.teatroapp.beans.Obra;
+import com.example.teatroapp.beans.ObraSala;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
     private EditText edtPrecio;
 
     Obra obra = new Obra();
+
+    private int idObra;
 
     AddObraPresenter presenter = new AddObraPresenter(this);
 
@@ -70,21 +73,30 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
                 Log.d("VALORES", "Precio: " + obra.getPrecio());
                 presenter.add(obra);
 
-                sucessAdd(idObras);
+
 
 
             }
         });
 
+        sucessAdd(idObras);
+
     }
 
     @Override
     public void sucessAdd(ArrayList<Obra> lstObras) {
-        this.idObras = lstObras;
-        Obra obra = lstObras.get(0);
-        int idObra = obra.getIdObra();
-
-
+        if (lstObras != null && !lstObras.isEmpty()) {
+            this.idObras = lstObras;
+            Obra obra = lstObras.get(0);
+            int idObra = obra.getIdObra();
+            Intent intent = getIntent();
+            int idSala = Integer.parseInt(intent.getStringExtra("idSala"));
+            ObraSala obraSala = new ObraSala(idObra, idSala);
+            presenter.addObraSala(obraSala);
+        } else {
+            // Manejar el caso en que lstObras es null o vacío
+            Log.e("ERROR", "lstObras es null o vacío");
+        }
 
     }
 

@@ -47,10 +47,11 @@ public class AddObrasModel implements AddContract.Model {
     }
     public void addObraSala(ObraSala obraSala, final OnLstObrasListener onLstObrasListener) {
         ApiObras apiObras = ApiTeatro.getClient().create(ApiObras.class);
-        Call<ArrayList<Obra>> call = apiObras.addObra(
+        Call<ArrayList<Obra>> call = apiObras.addObraSala(
                 "ObraSala.ADD",
-                obraSala.getIdObra(),
-                obraSala.getIdSala()
+                obraSala.getIdSala(),
+                obraSala.getIdObra()
+
         );
         call.enqueue(new Callback<ArrayList<Obra>>() {
             @Override

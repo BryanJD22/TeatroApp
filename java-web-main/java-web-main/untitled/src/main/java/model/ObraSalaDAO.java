@@ -19,9 +19,10 @@ public class ObraSalaDAO implements DAO<ObraSala, Integer>{
         motorSQL.conectar();
         String sql = "INSERT INTO OBRA_SALA(id_obra, id_sala) VALUES (" +
                 bean.getIdObra() + ", " +
-                bean.getIdSala() + ", '" +
-                "')";
-
+                bean.getIdSala() + ")" ;
+        System.out.println(sql);
+        resp = motorSQL.modificar(sql);
+        motorSQL.desconectar();
         return resp;
     }
 

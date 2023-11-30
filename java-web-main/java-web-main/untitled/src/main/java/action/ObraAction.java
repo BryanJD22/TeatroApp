@@ -1,9 +1,7 @@
 package action;
 
 import beans.Obra;
-import beans.User;
 import model.ObraDAO;
-import model.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -105,7 +103,11 @@ public class  ObraAction implements IAction{
         BigDecimal precioObra = new BigDecimal(precio);
         Obra obra = new Obra(tituloObra,desc, Integer.parseInt(duracion),precioObra);
         int respuesta = obraDAO.add(obra);
-        return "{\"Id obra\":"+respuesta+"}";
+        Obra obra1 = new Obra(respuesta);
+        ArrayList<Obra> obras = new ArrayList<>();
+        obras.add(obra1);
+
+        return Obra.toArrayJson(obras);
 
     }
 

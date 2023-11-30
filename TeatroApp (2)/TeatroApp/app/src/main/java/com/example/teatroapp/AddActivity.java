@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.teatroapp.AddObras.AddContract;
 import com.example.teatroapp.AddObras.AddObraPresenter;
@@ -65,22 +67,85 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
 
                 obra.setTituloObra(edtTituloObra.getText().toString());
                 obra.setDescripcionObra(edtDesc.getText().toString());
-                obra.setDuracionMin(Integer.parseInt(String.valueOf(edtDuracion.getText())));
-                obra.setPrecio(new BigDecimal(String.valueOf(edtPrecio.getText())));
+
+
+                String duracionStr = String.valueOf(edtDuracion.getText());
+
+                if (validarInteger(duracionStr)!=false) {
+
+                    obra.setDuracionMin(Integer.parseInt(duracionStr));
+
+                } else {
+                    View layout = getLayoutInflater().inflate(R.layout.toast_style, findViewById(R.id.toast_layout_style));
+
+                    // Configurar el texto del Toast (puedes personalizarlo según tus necesidades)
+                    TextView text = layout.findViewById(R.id.toast_text);
+                    text.setText("Duracion no valida, tiene que ser un entero de los minutos" +
+                            " que dure la obra");
+
+                    // Crear y mostrar el Toast personalizado
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
+                    return; // Puedes salir del método o manejar el error de otra manera
+                }
+
+                // Validar el precio
+                String precioStr = String.valueOf(edtPrecio.getText());
+                if (validarBigDecimal(precioStr)!=false) {
+                    obra.setPrecio(new BigDecimal(precioStr));
+                } else {
+                    View layout = getLayoutInflater().inflate(R.layout.toast_style, findViewById(R.id.toast_layout_style));
+
+                    // Configurar el texto del Toast (puedes personalizarlo según tus necesidades)
+                    TextView text = layout.findViewById(R.id.toast_text);
+                    text.setText("Precio no aceptado, no puede tener mas de 10 digitos incluyendo los " +
+                            "2 despues del punto");
+
+                    // Crear y mostrar el Toast personalizado
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.setView(layout);
+                    toast.show();
+
+                    return; // Puedes salir del método o manejar el error de otra manera
+                }
+
+
                 Log.d("VALORES", "Título: " + obra.getTituloObra());
                 Log.d("VALORES", "Descripción: " + obra.getDescripcionObra());
                 Log.d("VALORES", "Duración: " + obra.getDuracionMin());
                 Log.d("VALORES", "Precio: " + obra.getPrecio());
                 presenter.add(obra);
 
-
+                sucessAdd(idObras);
 
 
             }
         });
 
-        sucessAdd(idObras);
 
+
+    }
+
+    private boolean validarInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    // Método para verificar si una cadena representa un BigDecimal válido
+    private boolean validarBigDecimal(String str) {
+        try {
+            new BigDecimal(str);
+            return true;
+        } catch (NumberFormatException | ArithmeticException e) {
+            return false;
+        }
     }
 
     @Override
@@ -93,10 +158,24 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
             int idSala = Integer.parseInt(intent.getStringExtra("idSala"));
             ObraSala obraSala = new ObraSala(idObra, idSala);
             presenter.addObraSala(obraSala);
+
+
         } else {
             // Manejar el caso en que lstObras es null o vacío
             Log.e("ERROR", "lstObras es null o vacío");
         }
+
+        View layout = getLayoutInflater().inflate(R.layout.toast_style, findViewById(R.id.toast_layout_style));
+
+        // Configurar el texto del Toast (puedes personalizarlo según tus necesidades)
+        TextView text = layout.findViewById(R.id.toast_text);
+        text.setText("Obra añadida correctamente");
+
+        // Crear y mostrar el Toast personalizado
+        Toast toast = new Toast(this);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
 
     }
 

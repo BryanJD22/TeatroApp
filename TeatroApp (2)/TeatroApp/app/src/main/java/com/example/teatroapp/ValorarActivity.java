@@ -60,7 +60,7 @@ public class ValorarActivity extends AppCompatActivity  implements ValorarContra
 
                 } else {
 
-                    Toast.makeText(ValorarActivity.this, "Invalid puntuacion. Please enter a number between 1 and 5.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ValorarActivity.this, "La valoracion tiene que estar entre 1 y 5", Toast.LENGTH_SHORT).show();
                 }
             }
         });

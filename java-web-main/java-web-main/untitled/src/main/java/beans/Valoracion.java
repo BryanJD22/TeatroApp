@@ -3,7 +3,7 @@ package beans;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Valoracion {

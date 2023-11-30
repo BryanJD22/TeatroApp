@@ -69,7 +69,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         sendRequestObras(datosObra);
 
         presenter.getValoraciones(String.valueOf(idObra));
-
+        sucessLstValoraciones(valoraciones);
 
 
 
@@ -130,11 +130,11 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void sucessLstValoraciones(ArrayList<Valoracion> lstValoraciones) {
-
+        this.valoraciones = lstValoraciones;
 
         if (!lstValoraciones.isEmpty()) {
-            Valoracion valoracion = lstValoraciones.get(0); // Assuming you are getting a single Valoracion
-            obraValoracionTxt.setText(String.valueOf(valoracion.getValoracion())); // Assuming there's a method like getRating() in Valoracion class
+            Valoracion valoracion = lstValoraciones.get(0);
+            obraValoracionTxt.setText(String.valueOf(valoracion.getValoracion()));
         } else {
             obraValoracionTxt.setText("No hay valoraciones hechas");
         }

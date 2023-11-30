@@ -33,6 +33,7 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
     AddObraPresenter presenter = new AddObraPresenter(this);
 
     private Button addBtn;
+    ArrayList<Obra> idObras;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -69,6 +70,7 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
                 Log.d("VALORES", "Precio: " + obra.getPrecio());
                 presenter.add(obra);
 
+                sucessAdd(idObras);
 
 
             }
@@ -78,6 +80,11 @@ public class AddActivity extends AppCompatActivity implements AddContract.View {
 
     @Override
     public void sucessAdd(ArrayList<Obra> lstObras) {
+        this.idObras = lstObras;
+        Obra obra = lstObras.get(0);
+        int idObra = obra.getIdObra();
+
+
 
     }
 

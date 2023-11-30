@@ -2,6 +2,7 @@ package com.example.teatroapp.AddObras;
 
 import com.example.teatroapp.Obras.ObraContract;
 import com.example.teatroapp.beans.Obra;
+import com.example.teatroapp.beans.ObraSala;
 
 import java.util.ArrayList;
 
@@ -31,4 +32,20 @@ public class AddObraPresenter implements AddContract.Presenter{
         });
 
     }
+
+    public void addObraSala(ObraSala obraSala) {
+        this.model.addObraSala(obraSala, new AddContract.Model.OnLstObrasListener() {
+            @Override
+            public void onFinished(ArrayList<Obra> lstObras) {
+                vista.sucessAdd(lstObras);
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+
+    }
+
 }

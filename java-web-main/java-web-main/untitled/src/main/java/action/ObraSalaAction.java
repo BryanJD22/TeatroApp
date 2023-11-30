@@ -34,8 +34,9 @@ public class ObraSalaAction implements IAction{
 
         ObraSala obraSala = new ObraSala(Integer.parseInt(idObra),Integer.parseInt(idSala));
 
+        int resp = obraSalaDAO.add(obraSala);
 
-        return null;
+        return "{\"Lineas afectadas\":"+resp+"}";
 
     }
 }

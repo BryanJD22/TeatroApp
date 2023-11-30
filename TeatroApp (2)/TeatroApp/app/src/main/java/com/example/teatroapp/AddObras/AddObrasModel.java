@@ -5,6 +5,7 @@ import com.example.teatroapp.ApiS.ApiTeatro;
 import com.example.teatroapp.ApiS.ApiUsers;
 import com.example.teatroapp.Obras.ObraContract;
 import com.example.teatroapp.beans.Obra;
+import com.example.teatroapp.beans.ObraSala;
 import com.example.teatroapp.beans.Usuario;
 
 import java.util.ArrayList;
@@ -44,11 +45,40 @@ public class AddObrasModel implements AddContract.Model {
             }
         });
     }
+    public void addObraSala(ObraSala obraSala, final OnLstObrasListener onLstObrasListener) {
+        ApiObras apiObras = ApiTeatro.getClient().create(ApiObras.class);
+        Call<ArrayList<Obra>> call = apiObras.addObra(
+                "ObraSala.ADD",
+                obraSala.getIdObra(),
+                obraSala.getIdSala()
+        );
+        call.enqueue(new Callback<ArrayList<Obra>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Obra>> call, Response<ArrayList<Obra>> response) {
+                if (response.isSuccessful()) {
+                    ArrayList<Obra> obras = response.body();
+                    if (obras != null) {
+                        onLstObrasListener.onFinished(obras);
+                    } else {
+                        onLstObrasListener.onFailure("Fallo: Agregar obra");
+                    }
+                } else {
+                    onLstObrasListener.onFailure("Fallo en la respuesta del servidor");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Obra>> call, Throwable t) {
+                onLstObrasListener.onFailure("Error en la solicitud: " + t.getMessage());
+            }
+        });
+
+
+
+    }
 
     @Override
     public void getObrasService(OnLstObrasListener onLstObrasListener) {
 
     }
-
-
 }

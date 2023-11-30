@@ -25,4 +25,7 @@ public interface ApiObras {
                                   @Query("DESC") String desc,
                                   @Query("DURACION") int duracion,
                                   @Query("PRECIO") BigDecimal precio);
+
+    @GET("ServletTeatro")
+    Call<ArrayList<Obra>> addObra(String s, int idObra, int idSala);
 }

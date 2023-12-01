@@ -29,9 +29,13 @@ public class ObraSalaAction implements IAction{
         return pagDestino;
     }
 
-    private String getFechas(HttpServletRequest request, HttpServletResponse response) {
+    private String getFechas(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        String idObra = request.getParameter("IDOBRA");
+        ArrayList<ObraSala> obraSalas = new ArrayList<>();
+        ObraSalaDAO obraSalaDAO = new ObraSalaDAO();
+        obraSalas = obraSalaDAO.getFechas(Integer.parseInt(idObra));
 
-        
+        return ObraSala.toArrayJson(obraSalas);
     }
 
     private String add(HttpServletRequest request, HttpServletResponse response) {

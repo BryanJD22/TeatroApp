@@ -17,6 +17,10 @@ public class ObraSala {
     private Date fechaCreacion;
     private Date fechaModificacion;
 
+    public ObraSala(int idObra) {
+        this.idObra = idObra;
+    }
+
     public ObraSala(int idObra, int idSala) {
         this.idObra = idObra;
         this.idSala = idSala;
@@ -26,6 +30,13 @@ public class ObraSala {
         this.idObraSala = idObraSala;
         this.idObra = idObra;
         this.idSala = idSala;
+    }
+
+    public ObraSala(int idObraSala, int idSala, Date fecha, String hora) {
+        this.idObraSala = idObraSala;
+        this.idSala = idSala;
+        this.fecha = fecha;
+        this.hora = hora;
     }
 
     public int getIdObraSala() {

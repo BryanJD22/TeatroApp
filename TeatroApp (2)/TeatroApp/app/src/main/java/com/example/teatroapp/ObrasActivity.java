@@ -65,6 +65,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
 
             String categoria = intent.getStringExtra("categoria");
             lstCategoriaPresenter.getObrasPorCategoria(categoria);
+            successListObrasPorCategoria(lstObras);
             agregarbtn = findViewById(R.id.addbtnObras);
             agregarbtn.setVisibility(View.GONE);
 

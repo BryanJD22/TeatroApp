@@ -70,6 +70,7 @@ public class CategoriaPresenter extends ArrayList<Categoria> implements Categori
             public void onFailure(String error) {
 
             }
+
         });
 
     }

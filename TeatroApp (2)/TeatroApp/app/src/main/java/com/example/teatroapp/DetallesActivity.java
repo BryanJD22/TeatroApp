@@ -54,15 +54,12 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         setContentView(R.layout.activity_detalles);
         initView();
         String sourceAdapter = getIntent().getStringExtra("sourceAdapter");
-        if ("AdapterObras".equals(sourceAdapter)) {
-            idObra = getIntent().getIntExtra("idObra",0);
-        } else if ("UObrasAdapter".equals(sourceAdapter)) {
-            idObra = getIntent().getIntExtra("idObra",0);
-            tituloObraV = getIntent().getStringExtra("tituloObra");
-            idUser = getIntent().getIntExtra("idUser", 0);
-        } else {
 
-        }
+
+        idObra = getIntent().getIntExtra("idObra",0);
+        tituloObraV = getIntent().getStringExtra("tituloObra");
+        idUser = getIntent().getIntExtra("idUser", 0);
+
 
 
         presenter = new ValorarPresenter(this);

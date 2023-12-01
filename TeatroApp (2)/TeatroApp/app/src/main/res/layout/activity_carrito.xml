@@ -11,18 +11,19 @@
         android:id="@+id/CarritoBackBtn"
         android:layout_width="26dp"
         android:layout_height="29dp"
-        android:layout_margin="10dp"
         android:background="@drawable/back"
         android:backgroundTint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tu carrito:"
+        android:text="Entradas:"
+        android:textColor="@color/black"
         android:textSize="55sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,22 +36,22 @@
         android:layout_marginTop="120dp"
         android:background="@drawable/backgrount_carrito"
         android:orientation="vertical"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:paddingLeft="22dp"
-        android:paddingRight="22dp">
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="10dp"
+            android:includeFontPadding="false"
             android:text="Productos añadidos:"
             android:textColor="@color/white"
-            android:textSize="25sp"
-            android:includeFontPadding="false"
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="25sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Carrito"
@@ -67,25 +68,26 @@
             android:layout_gravity="center"
             android:layout_marginTop="14dp"
             android:backgroundTint="@color/white"
+            android:includeFontPadding="false"
             android:text="CONFIRMAR COMPRA"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:includeFontPadding="false"/>
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:includeFontPadding="false"
             android:text="Historial de compras:"
             android:textColor="@color/white"
-            android:textSize="25sp"
-            android:includeFontPadding="false"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="25sp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/CarritoHistorial"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
     </LinearLayout>
 

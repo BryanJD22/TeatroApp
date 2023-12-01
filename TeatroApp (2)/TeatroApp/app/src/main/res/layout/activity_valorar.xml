@@ -55,7 +55,7 @@
                     android:background="@drawable/custom_edittext"
                     android:drawableLeft="@drawable/done_icon"
                     android:drawablePadding="8dp"
-                    android:hint="Puntuacion"
+                    android:hint="Del 1 al 5"
                     android:padding="8dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/cardview_dark_background"

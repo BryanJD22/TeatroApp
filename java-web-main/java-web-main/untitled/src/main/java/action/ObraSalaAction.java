@@ -20,24 +20,30 @@ public class ObraSalaAction implements IAction{
             case "ADD":
                 pagDestino = add(request, response);
                 break;
-
+            case "FECHASBY_IDOBRA":
+                pagDestino = getFechas(request, response);
+                break;
 
 
         }
         return pagDestino;
     }
 
+    private String getFechas(HttpServletRequest request, HttpServletResponse response) {
+
+        
+    }
+
     private String add(HttpServletRequest request, HttpServletResponse response) {
         ObraSalaDAO obraSalaDAO = new ObraSalaDAO();
         String idObra = request.getParameter("IDOBRA");
         String idSala = request.getParameter("IDSALA");
-
-
         ObraSala obraSala = new ObraSala(Integer.parseInt(idObra),Integer.parseInt(idSala));
-
         int resp = obraSalaDAO.add(obraSala);
-
         return "{\"Lineas afectadas\":"+resp+"}";
 
     }
+
+
+
 }

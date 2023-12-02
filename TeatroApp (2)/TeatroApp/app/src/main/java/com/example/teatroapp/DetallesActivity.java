@@ -19,15 +19,18 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.teatroapp.Adapter.CategoriasAdapter;
 import com.example.teatroapp.Categorias.CategoriaContract;
 import com.example.teatroapp.Categorias.CategoriaPresenter;
+import com.example.teatroapp.Compra.CompraContract;
+import com.example.teatroapp.Compra.CompraPresenter;
 import com.example.teatroapp.Valorar.ValorarContract;
 import com.example.teatroapp.Valorar.ValorarPresenter;
 import com.example.teatroapp.beans.Categoria;
 import com.example.teatroapp.beans.Obra;
+import com.example.teatroapp.beans.ObraSala;
 import com.example.teatroapp.beans.Valoracion;
 
 import java.util.ArrayList;
 
-public class DetallesActivity extends AppCompatActivity implements ValorarContract.View, CategoriaContract.View {
+public class DetallesActivity extends AppCompatActivity implements ValorarContract.View, CategoriaContract.View, CompraContract.View {
     private TextView tituloObra, obraValoracionTxt, duracionTxt, descObra;
     private ProgressBar progressBar;
     private NestedScrollView scrollView;
@@ -40,10 +43,12 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     private String tituloObraV;
     ValorarPresenter presenter;
+    CompraPresenter compraPresenter;
 
     ArrayList<Valoracion> valoraciones = new ArrayList<>();
 
     CategoriaPresenter categoriaspresenter;
+
     private RecyclerView.Adapter adaptercategorias;
 
     private RecyclerView  recyclerViewCategoria;
@@ -69,6 +74,9 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         categoriaspresenter.getCategoriasPorObra(String.valueOf(idObra));
 
 
+        compraPresenter = new CompraPresenter(this);
+
+        compraPresenter.getFechas(String.valueOf(idObra));
 
         presenter.getObraById(String.valueOf(idObra));
         sendRequestObras(datosObra);
@@ -178,6 +186,16 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void successListObrasPorCategoria(ArrayList<Obra> lstObras) {
+
+    }
+
+    @Override
+    public void sucessListFechas(ArrayList<ObraSala> lstobraSala) {
+
+    }
+
+    @Override
+    public void failureListFechas(String message) {
 
     }
 }

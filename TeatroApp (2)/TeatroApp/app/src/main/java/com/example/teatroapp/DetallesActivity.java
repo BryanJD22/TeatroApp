@@ -17,6 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.teatroapp.Adapter.CategoriasAdapter;
+import com.example.teatroapp.Adapter.FechasAdapter;
 import com.example.teatroapp.Categorias.CategoriaContract;
 import com.example.teatroapp.Categorias.CategoriaPresenter;
 import com.example.teatroapp.Compra.CompraContract;
@@ -35,7 +36,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     private ProgressBar progressBar;
     private NestedScrollView scrollView;
     private ImageView pic2, backImg, valorarStar;
-    private RecyclerView recyclerViewCategorias;
+    private RecyclerView recyclerViewCategorias, recyclerViewFechas;
 
     ArrayList<Categoria> lstCategorias = new ArrayList<>();
     ArrayList<Obra> datosObra = new ArrayList<>();
@@ -46,10 +47,11 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     CompraPresenter compraPresenter;
 
     ArrayList<Valoracion> valoraciones = new ArrayList<>();
+    ArrayList<ObraSala> fechas = new ArrayList<>();
 
     CategoriaPresenter categoriaspresenter;
 
-    private RecyclerView.Adapter adaptercategorias;
+    private RecyclerView.Adapter adaptercategorias, adapterfechas;
 
     private RecyclerView  recyclerViewCategoria;
 
@@ -58,7 +60,6 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
         initView();
-        String sourceAdapter = getIntent().getStringExtra("sourceAdapter");
 
 
         idObra = getIntent().getIntExtra("idObra",0);
@@ -74,9 +75,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         categoriaspresenter.getCategoriasPorObra(String.valueOf(idObra));
 
 
-        compraPresenter = new CompraPresenter(this);
 
-        compraPresenter.getFechas(String.valueOf(idObra));
 
         presenter.getObraById(String.valueOf(idObra));
         sendRequestObras(datosObra);
@@ -86,6 +85,12 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
         sucessListCategorias(lstCategorias);
 
+
+        compraPresenter = new CompraPresenter(this);
+
+        compraPresenter.getFechas(String.valueOf(idObra));
+        sucessListFechas(fechas);
+
         obraValoracionTxt.setOnClickListener(v -> {
             Intent intent = new Intent(DetallesActivity.this, ValorarActivity.class);
             intent.putExtra("tituloObraV", tituloObraV);
@@ -93,6 +98,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
             intent.putExtra("idUser", idUser);
             startActivity(intent);
         });
+        
     }
 
 
@@ -189,9 +195,15 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     }
 
+
+
+
     @Override
     public void sucessListFechas(ArrayList<ObraSala> lstobraSala) {
-
+        this.fechas = lstobraSala;
+        recyclerViewFechas = findViewById(R.id.fechas);
+        adapterfechas = new FechasAdapter(lstobraSala, idUser);
+        recyclerViewFechas.setAdapter(adapterfechas);
     }
 
     @Override

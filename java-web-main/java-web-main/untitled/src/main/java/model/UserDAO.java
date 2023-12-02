@@ -63,6 +63,8 @@ public class UserDAO implements DAO<User, Integer> {
         ArrayList<User> lstUsuarios = new ArrayList<>();
 
         String sql = "SELECT id_usuario FROM usuario WHERE email ='"+bean.getEmail()+"' AND contraseña ='"+bean.getPassword()+"'";
+        System.out.println(sql);
+
         motosSql.conectar();
         ResultSet rs = motosSql.consultar(sql);
 

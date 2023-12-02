@@ -15,6 +15,13 @@ public class ObraSala {
     private Date fechaCreacion;
     private Date fechaModificacion;
 
+    public ObraSala(int idObraSala, int idSala, Date fecha, String hora) {
+        this.idObraSala = idObraSala;
+        this.idSala = idSala;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
+
     public ObraSala(int idObra, int idSala) {
         this.idObra = idObra;
         this.idSala = idSala;

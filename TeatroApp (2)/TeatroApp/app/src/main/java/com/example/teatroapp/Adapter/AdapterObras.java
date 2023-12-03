@@ -71,10 +71,12 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
 
 
        /* Añadir URL para las imágenes
-       String urlImage="http://192.0.0.0:8080/CinesAragon/images/"+
+       String urlImage="http://192.168.104.68:8080/untitle/img/"+
 
                lstFilms.get(posFila).getUrl()+".png";
        Picasso.get().load(urlImage).into(viewHolder.imagen);
+
+
       */
         //  viewHolder.imagen.setImageResource(lstFilms.get(posFila).getImagen());
 

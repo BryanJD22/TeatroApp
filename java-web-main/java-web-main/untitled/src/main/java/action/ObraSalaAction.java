@@ -34,7 +34,7 @@ public class ObraSalaAction implements IAction{
         ArrayList<ObraSala> obraSalas = new ArrayList<>();
         ObraSalaDAO obraSalaDAO = new ObraSalaDAO();
         obraSalas = obraSalaDAO.getFechas(Integer.parseInt(idObra));
-
+        System.out.println(ObraSala.toArrayJson(obraSalas));
         return ObraSala.toArrayJson(obraSalas);
     }
 

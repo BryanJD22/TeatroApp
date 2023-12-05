@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiTeatro {
 
     public static final String BASE_URL =
-            "http://192.168.104.80:8080/untitled/";
+            "http://192.168.104.64:8080/untitled/";
 
     private static Retrofit retrofit = null;
 

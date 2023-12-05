@@ -21,7 +21,7 @@ public class CompraPresenter implements CompraContract.Presenter{
         this.modelo.getFechas(idObra, new CompraContract.Model.OnLstObraSalaListener() {
             @Override
             public void onFinished(ArrayList<ObraSala> lstobraSala) {
-
+                    vista.sucessListFechas(lstobraSala);
             }
 
             @Override

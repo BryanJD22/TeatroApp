@@ -60,7 +60,7 @@ public class ObraSalaDAO implements DAO<ObraSala, Integer>{
             while (rs.next()) {
                 ObraSala obraSala = new ObraSala(rs.getInt("id_obra_sala"),
                         rs.getInt("id_sala"),
-                        rs.getDate("fecha"),
+                        rs.getString("fecha"),
                         rs.getString("hora")
 
                 );

@@ -41,7 +41,7 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
     public void onBindViewHolder(@NonNull FechasAdapter.ViewHolder holder, int position) {
 
         ObraSala obraSala = listObraSalas.get(position);
-        holder.fechaTxt.setText(obraSala.getFecha().toString());
+        holder.fechaTxt.setText(obraSala.getFecha());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, CarritoActivity.class);
@@ -57,7 +57,7 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
 
 
     @Override
-    public int getItemCount() {return 0;}
+    public int getItemCount() {return listObraSalas.size();}
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView fechaTxt;
@@ -67,6 +67,8 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
             fechaTxt = itemView.findViewById(R.id.categoriaTxt);
         }
     }
+
+
 
 
 }

@@ -55,7 +55,7 @@ public class  ObraAction implements IAction{
         String categoria = request.getParameter("CATEGORIA");
         ObraDAO obraDAO = new ObraDAO();
         ArrayList<Obra> lstporCategoria = obraDAO.porCategoria(categoria);
-
+        System.out.println(Obra.toArrayJson(lstporCategoria));
         return Obra.toArrayJson(lstporCategoria);
     }
 

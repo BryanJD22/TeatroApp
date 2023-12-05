@@ -12,7 +12,7 @@ public class ObraSala {
     int idObra;
     int idSala;
 
-    private Date fecha;
+    private String fecha;
     private String hora;
     private Date fechaCreacion;
     private Date fechaModificacion;
@@ -32,7 +32,7 @@ public class ObraSala {
         this.idSala = idSala;
     }
 
-    public ObraSala(int idObraSala, int idSala, Date fecha, String hora) {
+    public ObraSala(int idObraSala, int idSala, String fecha, String hora) {
         this.idObraSala = idObraSala;
         this.idSala = idSala;
         this.fecha = fecha;
@@ -64,11 +64,11 @@ public class ObraSala {
     }
 
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

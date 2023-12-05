@@ -27,6 +27,7 @@ public class CompraModel implements CompraContract.Model {
             public void onResponse(Call<ArrayList<ObraSala>> call, Response<ArrayList<ObraSala>> response) {
                 if(response.isSuccessful()){
                     ArrayList<ObraSala> obrasSalas = response.body();// Aquí tengo el JSON
+                    System.out.println(response.body());
                     if(obrasSalas!=null) {
                         onLstObraSalaListener.onFinished(obrasSalas);
 

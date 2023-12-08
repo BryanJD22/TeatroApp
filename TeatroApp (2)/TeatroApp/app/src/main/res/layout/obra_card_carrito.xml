@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ObrasActivity">
+    tools:context=".CarritoActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -36,6 +36,7 @@
                 android:id="@+id/CtituloObra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="titulo"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/Cimagen"
@@ -56,17 +57,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/CtituloObra"
+                android:text="descripcion"
+                android:textSize="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/Cimagen"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/black" />
 
+            <TextView
+                android:id="@+id/CnombreSala"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Cdesc"
+                android:text="titulo Sala"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/Cimagen"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/Cduracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/CnombreSala"
+                android:text="titulo Sala"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/Cimagen"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/Cfecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Cduracion"
+                android:text="titulo Sala"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/Cimagen"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/black" />
+
+
             <LinearLayout
-                android:layout_width="83dp"
+                android:layout_width="59dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="156dp"
+                android:layout_marginStart="124dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@+id/Cdesc"
                 android:gravity="left"
                 android:orientation="vertical"
@@ -75,13 +111,13 @@
 
                 <TextView
                     android:id="@+id/CartItemPrice"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
+                    android:paddingTop="10dp"
                     android:text="14.75€"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:paddingTop="10dp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView

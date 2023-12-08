@@ -44,6 +44,7 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
         holder.fechaTxt.setText(obraSala.getFecha());
 
         holder.itemView.setOnClickListener(v -> {
+
             Intent intent = new Intent(context, CarritoActivity.class);
             intent.putExtra("idSala", obraSala.getIdSala());
             intent.putExtra("idObra", obraSala.getIdObra());

@@ -77,6 +77,8 @@ public class Obra {
         this.imagenObra = imagenObra;
     }
 
+
+
     public Obra(int idObra, String tituloObra, String descripcionObra, String imagenObra, Timestamp fechaCreacion, Timestamp fechaModificacion) {
         this.idObra = idObra;
         this.tituloObra = tituloObra;

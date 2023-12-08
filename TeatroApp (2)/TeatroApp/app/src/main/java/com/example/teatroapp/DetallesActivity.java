@@ -211,5 +211,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     @Override
     public void failureListFechas(String message) {
 
+
     }
+
 }

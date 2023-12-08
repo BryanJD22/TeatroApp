@@ -82,7 +82,10 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
 
     }
 
-
+    @Override
+    public int getItemCount() {
+        return lstObras.size();
+    }
     public static class ObrasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         CardView cardView;
@@ -129,10 +132,7 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
     }*/
 
 
-    @Override
-    public int getItemCount() {
-        return lstObras.size();
-    }
+
 
 
 }

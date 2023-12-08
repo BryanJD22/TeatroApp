@@ -32,6 +32,14 @@ public class ObraSala {
         this.idSala = idSala;
     }
 
+    public ObraSala(int idObraSala, int idObra, int idSala, String fecha, String hora) {
+        this.idObraSala = idObraSala;
+        this.idObra = idObra;
+        this.idSala = idSala;
+        this.fecha = fecha;
+        this.hora = hora;
+    }
+
     public ObraSala(int idObraSala, int idSala, String fecha, String hora) {
         this.idObraSala = idObraSala;
         this.idSala = idSala;

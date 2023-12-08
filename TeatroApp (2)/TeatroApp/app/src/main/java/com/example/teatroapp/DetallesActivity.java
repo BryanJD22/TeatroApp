@@ -203,6 +203,8 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         this.fechas = lstobraSala;
         recyclerViewFechas = findViewById(R.id.fechas);
         adapterfechas = new FechasAdapter(lstobraSala, idUser);
+        recyclerViewFechas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
         recyclerViewFechas.setAdapter(adapterfechas);
     }
 

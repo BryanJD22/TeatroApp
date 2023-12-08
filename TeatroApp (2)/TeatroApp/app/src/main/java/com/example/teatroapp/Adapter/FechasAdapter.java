@@ -33,7 +33,7 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
     @Override
     public FechasAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_category, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_fechas, parent, false);
         return new ViewHolder(inflate);
     }
 
@@ -64,7 +64,7 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            fechaTxt = itemView.findViewById(R.id.categoriaTxt);
+            fechaTxt = itemView.findViewById(R.id.fechaTxt);
         }
     }
 

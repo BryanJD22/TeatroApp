@@ -65,7 +65,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
 
             String categoria = intent.getStringExtra("categoria");
             lstCategoriaPresenter.getObrasPorCategoria(categoria);
-            successListObrasPorCategoria(lstObras);
+
             agregarbtn = findViewById(R.id.addbtnObras);
             agregarbtn.setVisibility(View.GONE);
 
@@ -74,6 +74,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
             // Manejar el caso en el que no se proporcionó un ID de sala
 
         }
+
 
         /*// Obtener el Recycler
         recycler = (RecyclerView) findViewById(R.id.idReciclador);

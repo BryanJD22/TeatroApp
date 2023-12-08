@@ -46,7 +46,7 @@ public class ObraSalaDAO implements DAO<ObraSala, Integer>{
     }
 
     public ArrayList<ObraSala> getFechas(int idObra) throws SQLException {
-        String sql = "SELECT id_obra_sala, fecha, hora, id_sala" +
+        String sql = "SELECT id_obra, id_obra_sala, fecha, hora, id_sala" +
                 " FROM obra_sala" +
                 " WHERE id_obra =" + idObra;
         System.out.println(sql);
@@ -59,6 +59,7 @@ public class ObraSalaDAO implements DAO<ObraSala, Integer>{
         try {
             while (rs.next()) {
                 ObraSala obraSala = new ObraSala(rs.getInt("id_obra_sala"),
+                        rs.getInt("id_obra"),
                         rs.getInt("id_sala"),
                         rs.getString("fecha"),
                         rs.getString("hora")

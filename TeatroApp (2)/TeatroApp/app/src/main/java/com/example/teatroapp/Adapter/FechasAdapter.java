@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teatroapp.CarritoActivity;
+import com.example.teatroapp.DetallesActivity;
 import com.example.teatroapp.ObrasActivity;
 import com.example.teatroapp.R;
 import com.example.teatroapp.beans.Obra;
@@ -18,7 +19,7 @@ import com.example.teatroapp.beans.ObraSala;
 
 import java.util.ArrayList;
 
-public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder>{
+public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder> {
     ArrayList<ObraSala> listObraSalas;
     Context context;
     int idUser;
@@ -44,7 +45,7 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
         holder.fechaTxt.setText(obraSala.getFecha());
 
         holder.itemView.setOnClickListener(v -> {
-
+            ((DetallesActivity) context).agregarAlCarrito(obraSala);
             Intent intent = new Intent(context, CarritoActivity.class);
             intent.putExtra("idSala", obraSala.getIdSala());
             intent.putExtra("idObra", obraSala.getIdObra());

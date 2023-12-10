@@ -25,4 +25,8 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
     public ArrayList<Carrito> findAll() throws SQLException {
         return null;
     }
+
+    public ArrayList<Carrito> findCarrito(int id_usuario) throws SQLException {
+        return null;
+    }
 }

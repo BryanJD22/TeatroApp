@@ -85,6 +85,15 @@ CREATE TABLE obra_categoria (
     FOREIGN KEY (id_obra) REFERENCES obra(id_obra),
     FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
+CREATE TABLE carrito (
+    id_carrito INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_obra_sala INT,
+    cantidad INT,
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_obra_sala) REFERENCES obra_sala(id_obra_sala)
+);
 
 
 

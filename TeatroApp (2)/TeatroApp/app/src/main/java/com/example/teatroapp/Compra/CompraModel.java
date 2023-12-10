@@ -6,6 +6,7 @@ import com.example.teatroapp.ApiS.ApiCompra;
 import com.example.teatroapp.ApiS.ApiObras;
 import com.example.teatroapp.ApiS.ApiTeatro;
 import com.example.teatroapp.beans.Carrito;
+import com.example.teatroapp.beans.CarritoInfo;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.ObraSala;
 
@@ -74,6 +75,36 @@ public class CompraModel implements CompraContract.Model {
             }
             @Override
             public void onFailure(Call<ArrayList<Carrito>> call, Throwable t) {
+
+                Log.e("Retrofit Error", "Failed to make obras request", t);
+                onLstObraSalaListener.onFailure("Failed to retrieve obras: " + t.getMessage());
+            }
+        });
+    }
+
+    public void loadCarrito(String idUser, OnLstObraSalaListener onLstObraSalaListener) {
+        /*Ejecuto Webservice con retrofit*/
+        ApiCompra apiCompra = ApiTeatro.getClient().create(ApiCompra.class);
+        //petición asíncrona.
+        Call<ArrayList<CarritoInfo>> call = apiCompra.loadCarrito("Carrito.FIND_CARRITO",idUser);
+        call.enqueue(new Callback<ArrayList<CarritoInfo>>() {
+            public void onResponse(Call<ArrayList<CarritoInfo>> call, Response<ArrayList<CarritoInfo>> response) {
+                if(response.isSuccessful()){
+                    ArrayList<CarritoInfo> carrito = response.body();// Aquí tengo el JSON
+                    System.out.println(response.body());
+                    if(carrito!=null) {
+                        onLstObraSalaListener.loadCarrito(carrito);
+
+                    }else{
+                        Log.d("Bryan Error", "1");
+                        onLstObraSalaListener.onFailure("Fallo: Login");
+                    }
+                }else{
+                    Log.d("Bryan Error", "1");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<CarritoInfo>> call, Throwable t) {
 
                 Log.e("Retrofit Error", "Failed to make obras request", t);
                 onLstObraSalaListener.onFailure("Failed to retrieve obras: " + t.getMessage());

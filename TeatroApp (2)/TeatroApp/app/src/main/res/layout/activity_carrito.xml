@@ -56,7 +56,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Carrito"
             android:layout_width="match_parent"
-            android:layout_height="700dp"
+            android:layout_height="950dp"
             android:layout_weight="1">
 
         </androidx.recyclerview.widget.RecyclerView>

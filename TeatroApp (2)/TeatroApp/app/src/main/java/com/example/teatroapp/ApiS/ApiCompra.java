@@ -1,6 +1,7 @@
 package com.example.teatroapp.ApiS;
 
 import com.example.teatroapp.beans.Carrito;
+import com.example.teatroapp.beans.CarritoInfo;
 import com.example.teatroapp.beans.Categoria;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.ObraSala;
@@ -20,4 +21,6 @@ public interface ApiCompra {
                                         @Query("ID_OBRA_SALA") String id_obra_sala,
                                         @Query("CANTIDAD") String cantidad
                                          );
+    @GET("ServletTeatro")
+    Call<ArrayList<CarritoInfo>> loadCarrito(@Query("ACTION") String action, @Query("IDUSER") String idUser);
 }

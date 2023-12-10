@@ -24,6 +24,7 @@ import com.example.teatroapp.Compra.CompraContract;
 import com.example.teatroapp.Compra.CompraPresenter;
 import com.example.teatroapp.Valorar.ValorarContract;
 import com.example.teatroapp.Valorar.ValorarPresenter;
+import com.example.teatroapp.beans.CarritoInfo;
 import com.example.teatroapp.beans.Categoria;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.ObraSala;
@@ -207,6 +208,11 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         recyclerViewFechas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         recyclerViewFechas.setAdapter(adapterfechas);
+    }
+
+    @Override
+    public void sucessCarrito(ArrayList<CarritoInfo> carrito) {
+
     }
 
     @Override

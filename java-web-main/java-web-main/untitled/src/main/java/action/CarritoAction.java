@@ -1,11 +1,13 @@
 package action;
 
 import beans.Carrito;
+import beans.CarritoInfo;
 import model.CarritoDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CarritoAction implements IAction{
     @Override
@@ -15,8 +17,8 @@ public class CarritoAction implements IAction{
 
         String[] arrayAction = action.split("\\.");
         switch (arrayAction[1]) {
-            case "FIND_ALL":
-                pagDestino = findAll(request, response);
+            case "FIND_CARRITO":
+                pagDestino = findCarrito(request, response);
                 break;
             case "ADD":
                 pagDestino = addObra(request, response);
@@ -24,6 +26,15 @@ public class CarritoAction implements IAction{
 
         }
         return pagDestino;
+    }
+
+    private String findCarrito(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        String idUser = request.getParameter("IDUSER");
+        CarritoDAO carritoDAO = new CarritoDAO();
+
+        ArrayList<CarritoInfo> carritoInfos = carritoDAO.findCarrito(Integer.parseInt(idUser));
+        System.out.println(CarritoInfo.toArrayJson(carritoInfos));
+        return CarritoInfo.toArrayJson(carritoInfos);
     }
 
     private String addObra(HttpServletRequest request, HttpServletResponse response) {

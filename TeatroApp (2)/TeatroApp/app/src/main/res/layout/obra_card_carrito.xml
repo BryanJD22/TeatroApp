@@ -52,23 +52,12 @@
                 android:layout_toRightOf="@+id/Aimagen"
                 android:textAppearance="?android:attr/textAppearanceSmall" />-->
 
-            <TextView
-                android:id="@+id/Cdesc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/CtituloObra"
-                android:text="descripcion"
-                android:textSize="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/Cimagen"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/CnombreSala"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Cdesc"
+                android:layout_below="@+id/CtituloObra"
                 android:text="titulo Sala"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/Cimagen"

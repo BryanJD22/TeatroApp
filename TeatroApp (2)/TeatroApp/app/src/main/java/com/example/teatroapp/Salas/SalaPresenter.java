@@ -30,4 +30,20 @@ public class SalaPresenter implements  SalaContract.Presenter{
         });
 
     }
+
+    public void getSalaById(String idsala) {
+
+        this.modelo.getSalaById(idsala,new SalaContract.Model.OnLstSalasListener() {
+            @Override
+            public void onFinished(ArrayList<Sala> lstSalas) {
+                vista.sucessLstSalas(lstSalas);
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+
+    }
 }

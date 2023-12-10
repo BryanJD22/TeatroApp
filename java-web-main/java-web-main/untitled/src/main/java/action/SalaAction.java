@@ -21,12 +21,19 @@ public class SalaAction implements IAction{
             case "FIND_ALL":
                 pagDestino = findAll(request, response);
                 break;
-            case "LOGIN":
-                //pagDestino = login(request, response);
+            case "FINDBY_ID":
+                pagDestino = fingByID(request, response);
                 break;
 
         }
         return pagDestino;
+    }
+
+    private String fingByID(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        String idsala = request.getParameter("IDSALA");
+        ArrayList<Sala> salaById = new SalaDAO().findById(Integer.parseInt(idsala));
+        return Sala.toArrayJson(salaById);
+
     }
 
     private String findAll(HttpServletRequest request, HttpServletResponse response) throws SQLException {

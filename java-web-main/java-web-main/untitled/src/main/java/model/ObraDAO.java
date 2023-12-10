@@ -60,7 +60,10 @@ public class ObraDAO implements DAO<Obra,Integer>{
                 Obra obra = new Obra(rs.getInt("id_obra"),
                         rs.getString("titulo_obra"),
                                 rs.getString("descripcion_obra"),
-                                rs.getString("imagen_obra"));
+                                 rs.getInt("duracion"),
+                                rs.getString("imagen_obra"),
+                                rs.getBigDecimal("precio")
+                        );
 
                 lstObras.add(obra);
             }

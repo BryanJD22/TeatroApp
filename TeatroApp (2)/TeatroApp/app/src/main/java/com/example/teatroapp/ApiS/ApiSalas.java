@@ -12,4 +12,7 @@ public interface ApiSalas {
 
     @GET("ServletTeatro")
     Call<ArrayList<Sala>> lst_salas(@Query("ACTION") String action);
+
+    @GET("ServletTeatro")
+    Call<ArrayList<Sala>> lst_salasByid(@Query("ACTION") String action, String idSala);
 }

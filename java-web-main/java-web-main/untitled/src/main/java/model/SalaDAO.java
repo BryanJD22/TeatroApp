@@ -57,4 +57,33 @@ public class SalaDAO implements DAO<Sala, Integer>{
         motosSql.desconectar();
         return lstSalas;
     }
+
+    public ArrayList<Sala> findById(int id_sala) throws SQLException {
+        String sql = "SELECT * FROM SALA WHERE id_sala = "+ id_sala;
+        ArrayList<Sala> lstSalas = new ArrayList<>();
+
+        motosSql.conectar();
+        ResultSet rs = motosSql.consultar(sql);
+
+
+        try {
+            while (rs.next()) {
+                Sala sala = new Sala(rs.getInt("id_sala"),
+                        rs.getString("nombre"),
+                        rs.getInt("capacidad")
+
+                );
+
+                lstSalas.add(sala);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        motosSql.desconectar();
+        return lstSalas;
+    }
+
+
 }

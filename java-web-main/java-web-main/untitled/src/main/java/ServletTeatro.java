@@ -1,4 +1,5 @@
 import action.*;
+import beans.Carrito;
 import beans.Categoria;
 import beans.User;
 
@@ -65,6 +66,13 @@ public class ServletTeatro extends HttpServlet {
             case "Valorar":
                 try {
                     out.print(new ValorarAction().execute(request,response));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "Carrito":
+                try {
+                    out.print(new CarritoAction().execute(request,response));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

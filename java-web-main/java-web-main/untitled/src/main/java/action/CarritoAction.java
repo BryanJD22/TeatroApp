@@ -23,9 +23,31 @@ public class CarritoAction implements IAction{
             case "ADD":
                 pagDestino = addObra(request, response);
                 break;
+            case "HISTORIAL_CARRITO":
+                pagDestino = historial(request, response);
+                break;
+            case "CONFIRMAR":
+                pagDestino = confirmar(request,response);
+                break;
 
         }
         return pagDestino;
+    }
+
+    private String confirmar(HttpServletRequest request, HttpServletResponse response) {
+        String id_user = request.getParameter("IDUSER");
+        CarritoDAO carritoDAO = new CarritoDAO();
+
+        int resp = carritoDAO.confirmCompra(id_user);
+        return "{\"lineas_afectadas\":"+resp+"}";
+    }
+
+    private String historial(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        String iduser = request.getParameter("IDUSER");
+        CarritoDAO carritoDAO = new CarritoDAO();
+        ArrayList<Carrito> lstHistorial= carritoDAO.findhistorial(Integer.parseInt(iduser));
+        System.out.println(Carrito.toArrayJson(lstHistorial));
+        return Carrito.toArrayJson(lstHistorial);
     }
 
     private String findCarrito(HttpServletRequest request, HttpServletResponse response) throws SQLException {

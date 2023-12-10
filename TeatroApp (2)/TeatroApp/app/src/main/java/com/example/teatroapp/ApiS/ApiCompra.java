@@ -3,6 +3,7 @@ package com.example.teatroapp.ApiS;
 import com.example.teatroapp.beans.Carrito;
 import com.example.teatroapp.beans.CarritoInfo;
 import com.example.teatroapp.beans.Categoria;
+import com.example.teatroapp.beans.Confirm;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.ObraSala;
 
@@ -23,4 +24,10 @@ public interface ApiCompra {
                                          );
     @GET("ServletTeatro")
     Call<ArrayList<CarritoInfo>> loadCarrito(@Query("ACTION") String action, @Query("IDUSER") String idUser);
+
+    @GET("ServletTeatro")
+    Call<ArrayList<Carrito>> loadHistorial(@Query("ACTION") String action, @Query("IDUSER") String idUser);
+
+    @GET("ServletTeatro")
+    Call<Confirm> confirmar(@Query("ACTION") String action, @Query("IDUSER") String idUser);
 }

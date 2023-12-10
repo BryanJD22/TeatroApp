@@ -8,37 +8,49 @@ import java.util.ArrayList;
 
 public class Carrito {
     private int idCarrito;
+    private int idCompra;
     private int idUsuario;
-    private String tituloObra;
-    private String descripcionObra;
-    private String nombreSala;
-    private int duracionMin;
-    private String fechaObra;
-    private String  horaObra;
-    private double precio;
-    private Date fechaCreacion;
-    private Date fechaModificacion;
+    private int idObraSala;
+    private Integer cantidad;
+    private String fechaAgregado;
 
-    // Constructor por defecto
     public Carrito() {
+
     }
 
-    public Carrito(int idCarrito, int idUsuario, String tituloObra, String descripcionObra, String nombreSala, int duracionMin, String fechaObra, String horaObra, double precio) {
+    public Carrito(int idCompra, Integer cantidad, String fechaAgregado) {
+        this.idCompra = idCompra;
+        this.cantidad = cantidad;
+        this.fechaAgregado = fechaAgregado;
+    }
+
+    public Carrito(int idCarrito, int idUsuario, int cantidad, String fechaAgregado) {
         this.idCarrito = idCarrito;
         this.idUsuario = idUsuario;
-        this.tituloObra = tituloObra;
-        this.descripcionObra = descripcionObra;
-        this.nombreSala = nombreSala;
-        this.duracionMin = duracionMin;
-        this.fechaObra = fechaObra;
-        this.horaObra = horaObra;
-        this.precio = precio;
+        this.cantidad = cantidad;
+        this.fechaAgregado = fechaAgregado;
     }
 
-    // Getters y Setters
+    public Carrito(int idUsuario, int idObraSala, int cantidad) {
+        this.idUsuario = idUsuario;
+        this.idObraSala = idObraSala;
+        this.cantidad = cantidad;
+    }
 
     public int getIdCarrito() {
         return idCarrito;
+    }
+
+    public int getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(int idCompra) {
+        this.idCompra = idCompra;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     public void setIdCarrito(int idCarrito) {
@@ -53,76 +65,39 @@ public class Carrito {
         this.idUsuario = idUsuario;
     }
 
-    public String getTituloObra() {
-        return tituloObra;
+    public int getIdObraSala() {
+        return idObraSala;
     }
 
-    public void setTituloObra(String tituloObra) {
-        this.tituloObra = tituloObra;
+    public void setIdObraSala(int idObraSala) {
+        this.idObraSala = idObraSala;
     }
 
-    public String getDescripcionObra() {
-        return descripcionObra;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setDescripcionObra(String descripcionObra) {
-        this.descripcionObra = descripcionObra;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public String getNombreSala() {
-        return nombreSala;
+    public String getFechaAgregado() {
+        return fechaAgregado;
     }
 
-    public void setNombreSala(String nombreSala) {
-        this.nombreSala = nombreSala;
+    public void setFechaAgregado(String fechaAgregado) {
+        this.fechaAgregado = fechaAgregado;
     }
 
-    public int getDuracionMin() {
-        return duracionMin;
-    }
-
-    public void setDuracionMin(int duracionMin) {
-        this.duracionMin = duracionMin;
-    }
-
-    public String getFechaObra() {
-        return fechaObra;
-    }
-
-    public void setFechaObra(String fechaObra) {
-        this.fechaObra = fechaObra;
-    }
-
-    public String getHoraObra() {
-        return horaObra;
-    }
-
-    public void setHoraObra(String horaObra) {
-        this.horaObra = horaObra;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Date getFechaModificacion() {
-        return fechaModificacion;
-    }
-
-    public void setFechaModificacion(Date fechaModificacion) {
-        this.fechaModificacion = fechaModificacion;
+    @Override
+    public String toString() {
+        return "Carrito{" +
+                "idCarrito=" + idCarrito +
+                ", idUsuario=" + idUsuario +
+                ", idObraSala=" + idObraSala +
+                ", cantidad=" + cantidad +
+                ", fechaAgregado=" + fechaAgregado +
+                '}';
     }
 
     public static String toArrayJson(ArrayList<Carrito> lstcarrito) {

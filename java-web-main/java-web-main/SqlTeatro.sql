@@ -50,12 +50,11 @@ CREATE TABLE obra_sala (
 CREATE TABLE compra (
     id_compra INT AUTO_INCREMENT PRIMARY KEY,
     fecha_compra DATE,
-    id_obra_sala INT,
     id_usuario INT,
     cantidad INT,
+    confirmada TINYINT ,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_obra_sala) REFERENCES obra_sala(id_obra_sala),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
@@ -85,14 +84,18 @@ CREATE TABLE obra_categoria (
     FOREIGN KEY (id_obra) REFERENCES obra(id_obra),
     FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
 );
+
 CREATE TABLE carrito (
     id_carrito INT AUTO_INCREMENT PRIMARY KEY,
+    id_compra INT NOT NULL,
     id_usuario INT,
     id_obra_sala INT,
     cantidad INT,
     fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_obra_sala) REFERENCES obra_sala(id_obra_sala)
+    FOREIGN KEY (id_obra_sala) REFERENCES obra_sala(id_obra_sala),
+    FOREIGN KEY (id_compra) REFERENCES compra(id_compra)
+    
 );
 
 
@@ -189,37 +192,38 @@ VALUES
     (10, 6, '2023-10-25', '21:45:00');
 
 -- Generación de registros adicionales para compra
-INSERT INTO compra (fecha_compra, id_obra_sala, id_usuario, cantidad)
-VALUES ('2023-01-15', 1, 1, 2),
-       ('2023-02-20', 2, 2, 1),
-       ('2023-03-10', 3, 3, 3),
-       ('2023-04-05', 4, 4, 1),
-       ('2023-05-12', 5, 5, 2),
-       ('2023-06-18', 6, 6, 1),
-       ('2023-07-22', 7, 7, 3),
-       ('2023-08-30', 8, 8, 2),
-       ('2023-09-08', 9, 9, 1),
-       ('2023-10-14', 10, 10, 3),
-       ('2023-01-20', 11, 11, 2),
-       ('2023-02-25', 12, 12, 1),
-       ('2023-03-15', 13, 13, 3),
-       ('2023-04-10', 14, 14, 1),
-       ('2023-05-15', 15, 15, 2),
-       ('2023-06-20', 16, 16, 1),
-       ('2023-07-25', 17, 17, 3),
-       ('2023-08-31', 18, 18, 2),
-       ('2023-09-10', 19, 19, 1),
-       ('2023-10-20', 20, 20, 3),
-       ('2023-01-25', 21, 1, 2),
-       ('2023-02-28', 22, 2, 1),
-       ('2023-03-20', 23, 3, 3),
-       ('2023-04-15', 24, 4, 1),
-       ('2023-05-20', 25, 5, 2),
-       ('2023-06-25', 26, 6, 1),
-       ('2023-07-30', 27, 7, 3),
-       ('2023-08-31', 28, 8, 2),
-       ('2023-09-15', 29, 9, 1),
-       ('2023-10-25', 30, 10, 3);
+INSERT INTO compra (fecha_compra, id_usuario, cantidad, confirmada)
+VALUES 
+    ('2023-01-15', 1, 2, 1),
+    ('2023-02-20', 2, 1, 1),
+    ('2023-03-10', 3, 3, 1),
+    ('2023-04-05', 4, 1, 1),
+    ('2023-05-12', 5, 2, 1),
+    ('2023-06-18', 6, 1, 1),
+    ('2023-07-22', 7, 3, 1),
+    ('2023-08-30', 8, 2, 1),
+    ('2023-09-08', 9, 1, 1),
+    ('2023-10-14', 10, 3,1),
+    ('2023-01-20', 11, 2,1),
+    ('2023-02-25', 12, 1,1),
+    ('2023-03-15', 13, 3,1),
+    ('2023-04-10', 14, 1,1),
+    ('2023-05-15', 15, 2,1),
+    ('2023-06-20', 16, 1,1),
+    ('2023-07-25', 17, 3,1),
+    ('2023-08-31', 18, 2,1),
+    ('2023-09-10', 19, 1,1),
+    ('2023-10-20', 20, 3,1),
+    ('2023-01-25', 1, 2,1),
+    ('2023-02-28', 2, 1,1),
+    ('2023-03-20', 3, 3,1),
+    ('2023-04-15', 4, 1,1),
+    ('2023-05-20', 5, 2,1),
+    ('2023-06-25', 6, 1,1),
+    ('2023-07-30', 7, 3,1),
+    ('2023-08-31', 8, 2,1),
+    ('2023-09-15', 9, 1,1),
+    ('2023-10-25', 10, 3, 1);
 
 
 -- Generación de registros adicionales para valoracion

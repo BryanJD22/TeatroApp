@@ -24,8 +24,10 @@ import com.example.teatroapp.Compra.CompraContract;
 import com.example.teatroapp.Compra.CompraPresenter;
 import com.example.teatroapp.Valorar.ValorarContract;
 import com.example.teatroapp.Valorar.ValorarPresenter;
+import com.example.teatroapp.beans.Carrito;
 import com.example.teatroapp.beans.CarritoInfo;
 import com.example.teatroapp.beans.Categoria;
+import com.example.teatroapp.beans.Confirm;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.ObraSala;
 import com.example.teatroapp.beans.Valoracion;
@@ -212,6 +214,16 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     @Override
     public void sucessCarrito(ArrayList<CarritoInfo> carrito) {
+
+    }
+
+    @Override
+    public void confirmado(Confirm confirm) {
+
+    }
+
+    @Override
+    public void sucessHistorial(ArrayList<Carrito> carrito) {
 
     }
 

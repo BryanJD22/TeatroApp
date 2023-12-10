@@ -9,15 +9,28 @@ import java.util.Date;
 
 public class Carrito {
     private int idCarrito;
+    private int idCompra;
     private int idUsuario;
     private int idObraSala;
-    private int cantidad;
-    private Timestamp fechaAgregado;
+    private Integer cantidad;
+    private String fechaAgregado;
 
     public Carrito() {
 
     }
 
+    public Carrito(int idCompra, Integer cantidad, String fechaAgregado) {
+        this.idCompra = idCompra;
+        this.cantidad = cantidad;
+        this.fechaAgregado = fechaAgregado;
+    }
+
+    public Carrito(int idCarrito, int idUsuario, int cantidad, String fechaAgregado) {
+        this.idCarrito = idCarrito;
+        this.idUsuario = idUsuario;
+        this.cantidad = cantidad;
+        this.fechaAgregado = fechaAgregado;
+    }
 
     public Carrito(int idUsuario, int idObraSala, int cantidad) {
         this.idUsuario = idUsuario;
@@ -25,8 +38,24 @@ public class Carrito {
         this.cantidad = cantidad;
     }
 
+    public Carrito(int idCompra) {
+        this.idCompra = idCompra;
+    }
+
     public int getIdCarrito() {
         return idCarrito;
+    }
+
+    public int getIdCompra() {
+        return idCompra;
+    }
+
+    public void setIdCompra(int idCompra) {
+        this.idCompra = idCompra;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     public void setIdCarrito(int idCarrito) {
@@ -57,11 +86,11 @@ public class Carrito {
         this.cantidad = cantidad;
     }
 
-    public Timestamp getFechaAgregado() {
+    public String getFechaAgregado() {
         return fechaAgregado;
     }
 
-    public void setFechaAgregado(Timestamp fechaAgregado) {
+    public void setFechaAgregado(String fechaAgregado) {
         this.fechaAgregado = fechaAgregado;
     }
 

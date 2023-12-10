@@ -53,6 +53,7 @@ public class AdaptarCarrito extends RecyclerView.Adapter<AdaptarCarrito.CarritoV
                 .into(holder.Cimagen);
 
         holder.CartItemPrice.setText(String.format("%s €", carritoInfo.getPrecioObra()));
+
         holder.CartItemCantidad.setText(String.format("x%d", carritoInfo.getCantidad()));
 
         holder.deleteCarrito.setOnClickListener(v -> {

@@ -1,6 +1,7 @@
 package com.example.teatroapp.Compra;
 
 import com.example.teatroapp.Categorias.CategoriaContract;
+import com.example.teatroapp.beans.Carrito;
 import com.example.teatroapp.beans.Categoria;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.ObraSala;
@@ -24,6 +25,7 @@ public interface CompraContract {
     public interface Model{
         /*Programación Reactiva*/
         interface OnLstObraSalaListener{
+            void add(ArrayList<Carrito> lstcarrito);
             void onFinished(ArrayList<ObraSala> lstobraSala);
 
             void onFailure(String error);

@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.teatroapp.ApiS.ApiCompra;
 import com.example.teatroapp.ApiS.ApiObras;
 import com.example.teatroapp.ApiS.ApiTeatro;
+import com.example.teatroapp.beans.Carrito;
 import com.example.teatroapp.beans.Obra;
 import com.example.teatroapp.beans.ObraSala;
 
@@ -48,5 +49,35 @@ public class CompraModel implements CompraContract.Model {
         });
 
 
+    }
+
+    public void addCarrito(String idUser, String idObraSala, String i, OnLstObraSalaListener onLstObraSalaListener) {
+        /*Ejecuto Webservice con retrofit*/
+        ApiCompra apiCompra = ApiTeatro.getClient().create(ApiCompra.class);
+        //petición asíncrona.
+        Call<ArrayList<Carrito>> call = apiCompra.addCarrito("Carrito.ADD", idUser,idObraSala,i);
+        call.enqueue(new Callback<ArrayList<Carrito>>() {
+            public void onResponse(Call<ArrayList<Carrito>> call, Response<ArrayList<Carrito>> response) {
+                if(response.isSuccessful()){
+                    ArrayList<Carrito> carrito = response.body();// Aquí tengo el JSON
+                    System.out.println(response.body());
+                    if(carrito!=null) {
+                        onLstObraSalaListener.add(carrito);
+
+                    }else{
+                        Log.d("Bryan Error", "1");
+                        onLstObraSalaListener.onFailure("Fallo: Login");
+                    }
+                }else{
+                    Log.d("Bryan Error", "1");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Carrito>> call, Throwable t) {
+
+                Log.e("Retrofit Error", "Failed to make obras request", t);
+                onLstObraSalaListener.onFailure("Failed to retrieve obras: " + t.getMessage());
+            }
+        });
     }
 }

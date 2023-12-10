@@ -40,7 +40,8 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
 
     ArrayList<Categoria> lstCategorias = new ArrayList<>();
     ArrayList<Obra> datosObra = new ArrayList<>();
-    private int idObra, idUser;
+    private int idObra;
+    private int idUser;
 
     private String tituloObraV;
     ValorarPresenter presenter;
@@ -217,7 +218,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     public void agregarAlCarrito(ObraSala obraSala) {
         // Lógica para añadir al carrito aquí
         // Puedes utilizar el objeto compraPresenter para llamar a un método que maneje la adición al carrito
-        //compraPresenter.agregarAlCarrito(idUser, obraSala.getIdObraSala(), 1); // 1 es la cantidad, ajusta según sea necesario
+        compraPresenter.agregarAlCarrito(String.valueOf(idUser), String.valueOf(obraSala.getIdObraSala()), "1"); // 1 es la cantidad, ajusta según sea necesario
     }
 
 }

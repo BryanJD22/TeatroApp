@@ -2,13 +2,31 @@ package model;
 
 import beans.Carrito;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CarritoDAO implements DAO<Carrito,Integer> {
+
+    MotorSQL motosSql;
+
+    public CarritoDAO() {
+        this.motosSql = new MotorSQL();
+
+    }
+
     @Override
     public int add(Carrito bean) {
-        return 0;
+        int resp=0;
+        motosSql.conectar();
+        String sql = "INSERT INTO carrito (id_usuario, id_obra_sala, cantidad) VALUES ("+bean.getIdUsuario()+","+ bean.getIdObraSala()+","+ bean.getCantidad()+")";
+        System.out.println(sql);
+         resp = motosSql.modificar(sql);
+
+
+        motosSql.desconectar();
+
+        return resp;
     }
 
     @Override

@@ -69,9 +69,12 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
 
         compraPresenter = new CompraPresenter(this);
 
+
+
         compraPresenter.loadCarrito(String.valueOf(idUser));
 
         compraPresenter.loadHistorial(String.valueOf(idUser));
+        sucessHistorial(carritoHistorial);
 
 
         confirmarCompra = findViewById(R.id.CarritoConfirmarBtn);

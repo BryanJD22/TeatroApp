@@ -27,7 +27,7 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
                 "FROM compra\n" +
                 "WHERE id_usuario = " + bean.getIdUsuario() +
                 " AND confirmada = 0;";
-
+        System.out.println(sql2);
         ResultSet rs = motosSql.consultar(sql2);
         try {
             while (rs.next()) {
@@ -132,23 +132,16 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
 
         ArrayList<Carrito> lstcarrito = new ArrayList<>();
 
-        String sql = "SELECT\n" +
+        String sql = "SELECT \n" +
                 "    c.id_compra,\n" +
-                "    c.fecha_compra AS fecha,\n" +
-                "    SUM(o.precio) AS total_cantidad\n" +
-                "FROM\n" +
-                "    compra c\n" +
-                "JOIN\n" +
-                "    carrito crt ON c.id_compra = crt.id_compra\n" +
-                "JOIN\n" +
-                "    obra_sala os ON crt.id_obra_sala = os.id_obra_sala\n" +
-                "JOIN\n" +
-                "    obra o ON os.id_obra = o.id_obra\n" +
-                "WHERE\n" +
-                "    c.confirmada = 1\n" +
-                "    AND c.id_usuario = "+id_usuario + "\n" +
-                "GROUP BY\n" +
-                "    c.id_compra, c.fecha_compra;\n";
+                "    c.fecha_compra,\n" +
+                "    SUM(o.precio * c.cantidad) AS precio_total\n" +
+                "FROM compra c\n" +
+                "JOIN obra_sala os ON c.id_obra_sala = os.id_obra_sala\n" +
+                "JOIN obra o ON os.id_obra = o.id_obra\n" +
+                "WHERE c.id_usuario = "+ id_usuario + " AND c.confirmada = 1 " +
+                "GROUP BY c.id_compra, c.fecha_compra;\n";
+
         System.out.println(sql);
         motosSql.conectar();
         ResultSet rs = motosSql.consultar(sql);
@@ -156,8 +149,8 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
             while (rs.next()) {
                 Carrito carrito = new Carrito(
                         rs.getInt("id_compra"),
-                        rs.getInt("total_cantidad"),
-                        rs.getString("fecha")
+                        rs.getInt("precio_total"),
+                        rs.getString("fecha_compra")
                 );
 
                 lstcarrito.add(carrito);

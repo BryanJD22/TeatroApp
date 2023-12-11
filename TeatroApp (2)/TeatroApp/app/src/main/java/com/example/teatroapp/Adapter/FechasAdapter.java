@@ -49,6 +49,7 @@ public class FechasAdapter extends RecyclerView.Adapter<FechasAdapter.ViewHolder
             ((DetallesActivity) context).agregarAlCarrito(obraSala);
 
             Intent intent = new Intent(context, CarritoActivity.class);
+            intent.putExtra("idObraSala", obraSala.getIdObraSala());
             intent.putExtra("idSala", obraSala.getIdSala());
             intent.putExtra("idObra", obraSala.getIdObra());
             intent.putExtra("fecha", obraSala.getFecha());

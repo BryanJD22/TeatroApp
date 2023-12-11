@@ -29,10 +29,43 @@ public class CarritoAction implements IAction{
             case "CONFIRMAR":
                 pagDestino = confirmar(request,response);
                 break;
+            case "ELIMINAR":
+                pagDestino = eliminar(request,response);
+                break;
 
         }
         return pagDestino;
     }
+
+    private String eliminar(HttpServletRequest request, HttpServletResponse response) {
+        CarritoDAO carritoDAO = new CarritoDAO();
+
+        String idUsuario = request.getParameter("ID_USUARIO");
+        String idObraSala = request.getParameter("ID_OBRA_SALA");
+
+        // Verificar si hay un elemento en el carrito con el id_obra_sala deseado
+        ArrayList<CarritoInfo> carritoActual;
+        try {
+            carritoActual = carritoDAO.findCarrito(Integer.parseInt(idUsuario));
+            boolean idObraSalaEnCarrito = carritoActual.stream()
+                    .anyMatch(carritoInfo -> carritoInfo.getIdObraSala() != Integer.parseInt(idObraSala));
+
+            if (idObraSalaEnCarrito) {
+                // Eliminar el elemento del carrito solo si se encuentra en la lista
+                Carrito carrito = new Carrito(Integer.parseInt(idUsuario), Integer.parseInt(idObraSala));
+                int resp = carritoDAO.eliminar(carrito);
+                return "lineas afectadas" + resp;
+            } else {
+                return CarritoInfo.toArrayJson(carritoActual);
+            }
+        } catch (SQLException e) {
+            // Manejar la excepción según tus necesidades
+            e.printStackTrace();
+            // O lanzar una excepción no verificada, por ejemplo:
+            throw new RuntimeException("Error al procesar la solicitud", e);
+        }
+    }
+
 
     private String confirmar(HttpServletRequest request, HttpServletResponse response) {
         String id_user = request.getParameter("IDUSER");

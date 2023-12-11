@@ -10,7 +10,10 @@ import java.util.ArrayList;
 
 public class CarritoInfo {
     private int idCarrito;
+    private int idObraSala;
+
     private String tituloObra;
+
     private String imagenObra;
     private String nombreSala;
     private int duracionObra;
@@ -18,6 +21,19 @@ public class CarritoInfo {
     private String horaFuncion;
     private BigDecimal precioObra;
     private int cantidad;
+
+    public CarritoInfo(int idCarrito, int idObraSala, String tituloObra, String imagenObra, String nombreSala, int duracionObra, String fechaFuncion, String horaFuncion, BigDecimal precioObra, int cantidad) {
+        this.idCarrito = idCarrito;
+        this.idObraSala = idObraSala;
+        this.tituloObra = tituloObra;
+        this.imagenObra = imagenObra;
+        this.nombreSala = nombreSala;
+        this.duracionObra = duracionObra;
+        this.fechaFuncion = fechaFuncion;
+        this.horaFuncion = horaFuncion;
+        this.precioObra = precioObra;
+        this.cantidad = cantidad;
+    }
 
     public CarritoInfo(int idCarrito, String tituloObra, String imagenObra, String nombreSala, int duracionObra,
                        String fechaFuncion, String horaFuncion, BigDecimal precioObra, int cantidad) {
@@ -41,6 +57,14 @@ public class CarritoInfo {
 
     public void setIdCarrito(int idCarrito) {
         this.idCarrito = idCarrito;
+    }
+
+    public int getIdObraSala() {
+        return idObraSala;
+    }
+
+    public void setIdObraSala(int idObraSala) {
+        this.idObraSala = idObraSala;
     }
 
     public String getTituloObra() {

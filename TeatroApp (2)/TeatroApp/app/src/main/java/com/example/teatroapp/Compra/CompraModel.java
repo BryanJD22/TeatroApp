@@ -83,6 +83,36 @@ public class CompraModel implements CompraContract.Model {
         });
     }
 
+    public void eliminarCarrito(String idUser, String idObraSala, OnLstObraSalaListener onLstObraSalaListener) {
+        /*Ejecuto Webservice con retrofit*/
+        ApiCompra apiCompra = ApiTeatro.getClient().create(ApiCompra.class);
+        //petición asíncrona.
+        Call<ArrayList<Carrito>> call = apiCompra.eliminarCarito("Carrito.ELIMINAR", idUser,idObraSala);
+        call.enqueue(new Callback<ArrayList<Carrito>>() {
+            public void onResponse(Call<ArrayList<Carrito>> call, Response<ArrayList<Carrito>> response) {
+                if(response.isSuccessful()){
+                    ArrayList<Carrito> carrito = response.body();// Aquí tengo el JSON
+                    System.out.println(response.body());
+                    if(carrito!=null) {
+                        onLstObraSalaListener.add(carrito);
+
+                    }else{
+                        Log.d("Bryan Error", "1");
+                        onLstObraSalaListener.onFailure("Fallo: Login");
+                    }
+                }else{
+                    Log.d("Bryan Error", "1");
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Carrito>> call, Throwable t) {
+
+                Log.e("Retrofit Error", "Failed to make obras request", t);
+                onLstObraSalaListener.onFailure("Failed to retrieve obras: " + t.getMessage());
+            }
+        });
+    }
+
     public void loadCarrito(String idUser, OnLstObraSalaListener onLstObraSalaListener) {
         /*Ejecuto Webservice con retrofit*/
         ApiCompra apiCompra = ApiTeatro.getClient().create(ApiCompra.class);

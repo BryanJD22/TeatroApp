@@ -22,6 +22,12 @@ public interface ApiCompra {
                                         @Query("ID_OBRA_SALA") String id_obra_sala,
                                         @Query("CANTIDAD") String cantidad
                                          );
+
+    @GET("ServletTeatro")
+    Call<ArrayList<Carrito>> eliminarCarito(@Query("ACTION") String action, @Query("ID_USUARIO") String idusUario,
+                                        @Query("ID_OBRA_SALA") String id_obra_sala
+
+    );
     @GET("ServletTeatro")
     Call<ArrayList<CarritoInfo>> loadCarrito(@Query("ACTION") String action, @Query("IDUSER") String idUser);
 

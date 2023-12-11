@@ -19,6 +19,11 @@ public class Carrito {
 
     }
 
+    public Carrito(int idUsuario, int idObraSala) {
+        this.idUsuario = idUsuario;
+        this.idObraSala = idObraSala;
+    }
+
     public Carrito(int idCompra, Integer cantidad, String fechaAgregado) {
         this.idCompra = idCompra;
         this.cantidad = cantidad;

@@ -65,8 +65,10 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
         int idUser = getIntent().getIntExtra("idUser", 0);
         int idobra = getIntent().getIntExtra("idObra", 0);
         int idsala = getIntent().getIntExtra("idSala", 0);
+        int idOObraSala = getIntent().getIntExtra("idObraSala", 0);
 
         compraPresenter = new CompraPresenter(this);
+
         compraPresenter.loadCarrito(String.valueOf(idUser));
 
         compraPresenter.loadHistorial(String.valueOf(idUser));
@@ -113,7 +115,7 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
 
     @Override
     public void confirmado(Confirm confirm) {
-        makeNotifiation();
+
     }
 
     @Override

@@ -54,9 +54,32 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
 
     @Override
     public int delete(Integer e) {
-        return 0;
+        int resp = 0;
+
+
+
+        return resp;
     }
 
+    public int eliminar(Carrito bean) {
+        int resp = 0;
+        motosSql.conectar();
+
+        // Aquí asumo que la tabla tiene un campo único que identifica cada registro de carrito
+        String sql = "DELETE FROM carrito WHERE id_usuario = " + bean.getIdUsuario();
+
+        try {
+            resp = motosSql.modificar(sql);
+        } catch (Exception e) {
+            // Manejar la excepción según tus necesidades
+            e.printStackTrace();
+        } finally {
+            motosSql.desconectar();
+        }
+
+        return resp;
+
+    }
     @Override
     public int update(Carrito bean) {
         return 0;
@@ -71,12 +94,13 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
 
         ArrayList<CarritoInfo> lstCarrito = new ArrayList<>();
 
-        String sql = "SELECT c.id_carrito, o.titulo_obra, o.imagen_obra, o.descripcion_obra, s.nombre AS nombre_sala, o.duracion_min, os.fecha, os.hora, o.precio, c.cantidad\n" +
+        String sql = "SELECT c.id_carrito, o.titulo_obra, o.imagen_obra, o.descripcion_obra," +
+                " s.nombre AS nombre_sala, o.duracion_min, os.fecha, os.hora, o.precio, c.cantidad, os.id_obra_sala\n" +
                 "FROM carrito c\n" +
                 "INNER JOIN obra_sala os ON c.id_obra_sala = os.id_obra_sala\n" +
                 "INNER JOIN obra o ON os.id_obra = o.id_obra\n" +
                 "INNER JOIN sala s ON os.id_sala = s.id_sala\n" +
-                "WHERE c.id_usuario ="+id_usuario;
+                "WHERE c.id_usuario =" + id_usuario;
 
         motosSql.conectar();
         ResultSet rs = motosSql.consultar(sql);
@@ -84,6 +108,7 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
             while (rs.next()) {
                 CarritoInfo carrito = new CarritoInfo(
                         rs.getInt("id_carrito"),
+                        rs.getInt("id_obra_sala"),
                         rs.getString("titulo_obra"),
                         rs.getString("imagen_obra"),
                         rs.getString("nombre_sala"),

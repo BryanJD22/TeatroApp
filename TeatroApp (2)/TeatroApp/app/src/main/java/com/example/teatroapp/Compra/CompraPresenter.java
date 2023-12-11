@@ -87,7 +87,39 @@ public class CompraPresenter implements CompraContract.Presenter{
             }
         });
     }
+    public void eliminarCarrito(String idUser, String idObraSala) {
+        this.modelo.eliminarCarrito(idUser, idObraSala,new CompraContract.Model.OnLstObraSalaListener() {
+            @Override
+            public void add(ArrayList<Carrito> lstcarrito) {
 
+            }
+
+            @Override
+            public void loadCarrito(ArrayList<CarritoInfo> carrito) {
+
+            }
+
+            @Override
+            public void loadHistorial(ArrayList<Carrito> carrito) {
+
+            }
+
+            @Override
+            public void confirmado(Confirm confirm) {
+
+            }
+
+            @Override
+            public void onFinished(ArrayList<ObraSala> lstobraSala) {
+                vista.sucessListFechas(lstobraSala);
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
     public void loadCarrito(String idUser) {
         this.modelo.loadCarrito(idUser,new CompraContract.Model.OnLstObraSalaListener() {
             @Override

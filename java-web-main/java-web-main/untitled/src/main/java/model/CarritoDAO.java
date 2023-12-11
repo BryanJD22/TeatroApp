@@ -21,16 +21,19 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
 
     @Override
     public int add(Carrito bean)  {
-        int resp=0;
-        int delete;
+        int resp = 0;
+        int delete = 0;
 
         motosSql.conectar();
+
         String checkCarritoSql = "SELECT COUNT(*) AS count FROM carrito WHERE id_usuario = " + bean.getIdUsuario();
+        System.out.println(checkCarritoSql);
         ResultSet checkResult = motosSql.consultar(checkCarritoSql);
 
         try {
             if (checkResult.next()) {
                 int itemCount = checkResult.getInt("count");
+                System.out.println(itemCount);
 
                 if (itemCount > 0) {
                     // Hay elementos en el carrito, eliminarlos
@@ -41,6 +44,15 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (checkResult != null) {
+                try {
+                    checkResult.close();
+                } catch (SQLException e) {
+                    // Manejar la excepción según tus necesidades
+                    e.printStackTrace();
+                }
+            }
         }
 
         String sql2 = "SELECT id_compra\n" +
@@ -51,26 +63,20 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
         ResultSet rs = motosSql.consultar(sql2);
         try {
             while (rs.next()) {
-                Carrito carrito1 = new Carrito(
-                        rs.getInt("id_compra")
-
-                );
-                String sql = "INSERT INTO carrito (id_compra, id_usuario, id_obra_sala, cantidad) VALUES ("+carrito1.getIdCompra()+","+bean.getIdUsuario()+","+ bean.getIdObraSala()+","+ bean.getCantidad()+")";
+                Carrito carrito1 = new Carrito(rs.getInt("id_compra"));
+                String sql = "INSERT INTO carrito (id_compra, id_usuario, id_obra_sala, cantidad) VALUES (" + carrito1.getIdCompra() + "," + bean.getIdUsuario() + "," + bean.getIdObraSala() + "," + bean.getCantidad() + ")";
                 System.out.println(sql);
                 resp = motosSql.modificar(sql);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            motosSql.desconectar();
         }
-
-
-
-
-        motosSql.desconectar();
 
         return resp;
     }
+
 
     @Override
     public int delete(Integer e) {

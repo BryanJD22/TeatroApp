@@ -242,7 +242,7 @@ public class ObraDAO implements DAO<Obra,Integer>{
         return obraById;
     }
 
-    public ArrayList<Obra>  obraPorTitulo(String  tituloObra) {
+    public ArrayList<Obra> obraPorTitulo(String  tituloObra) {
         String sql = "SELECT * FROM OBRA WHERE titulo_obra = '" + tituloObra + "'";
         System.out.println(sql);
 

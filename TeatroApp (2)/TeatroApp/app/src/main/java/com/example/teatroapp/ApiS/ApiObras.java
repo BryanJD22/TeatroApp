@@ -30,4 +30,7 @@ public interface ApiObras {
     Call<ArrayList<Obra>> addObraSala(@Query("ACTION") String action,
                                   @Query("IDSALA") int idSala,
                                   @Query("IDOBRA") int idObra);
+
+    @GET("ServletTeatro")
+    Call<ArrayList<Obra>> obraportitulo(@Query("ACTION") String action, @Query("TITULO") String titulo);
 }

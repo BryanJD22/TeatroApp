@@ -104,6 +104,11 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
     }
 
     @Override
+    public void sucessObraPorTitulo(ArrayList<Obra> lstObras) {
+
+    }
+
+    @Override
     public void sendRequestTopVentas(ArrayList<Obra> lstObras) {
 
     }

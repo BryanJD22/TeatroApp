@@ -27,6 +27,10 @@ public class ObraPresenter extends ArrayList<Obra> implements ObraContract.Prese
                 vista.sucessListObras(lstObras);
             }
 
+            @Override
+            public void obraportitulo(ArrayList<Obra> lstObras) {
+
+            }
 
 
             @Override
@@ -45,6 +49,10 @@ public class ObraPresenter extends ArrayList<Obra> implements ObraContract.Prese
                 vista.sucessListObras(lstObras);
             }
 
+            @Override
+            public void obraportitulo(ArrayList<Obra> lstObras) {
+
+            }
 
 
             @Override
@@ -65,6 +73,10 @@ public class ObraPresenter extends ArrayList<Obra> implements ObraContract.Prese
                 vista.sendRequestTopVentas(lstObras);
             }
 
+            @Override
+            public void obraportitulo(ArrayList<Obra> lstObras) {
+
+            }
 
 
             @Override
@@ -83,8 +95,30 @@ public class ObraPresenter extends ArrayList<Obra> implements ObraContract.Prese
                 vista.sendRequestTopPopular(lstObras);
             }
 
+            @Override
+            public void obraportitulo(ArrayList<Obra> lstObras) {
+
+            }
 
 
+            @Override
+            public void onFailure(String error) {
+                vista.failureListObras(error);
+            }
+        });
+    }
+
+    public void getObraPorTitulo(String titulo) {
+        this.modelo.getObraPorTitulo(titulo,new ObraContract.Model.OnLstObrasListener() {
+            @Override
+            public void onFinished(ArrayList<Obra> lstObras) {
+                vista.sendRequestTopPopular(lstObras);
+            }
+
+
+            public void obraportitulo(ArrayList<Obra> lstObras) {
+                vista.sucessObraPorTitulo(lstObras);
+            }
             @Override
             public void onFailure(String error) {
                 vista.failureListObras(error);

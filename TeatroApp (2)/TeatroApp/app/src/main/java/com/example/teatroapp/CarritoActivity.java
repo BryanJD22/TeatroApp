@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.teatroapp.Adapter.AdaptarCarrito;
 import com.example.teatroapp.Adapter.AdapterHistorial;
@@ -62,6 +63,8 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
         }
 
         int idUser = getIntent().getIntExtra("idUser", 0);
+        int idobra = getIntent().getIntExtra("idObra", 0);
+        int idsala = getIntent().getIntExtra("idSala", 0);
 
         compraPresenter = new CompraPresenter(this);
         compraPresenter.loadCarrito(String.valueOf(idUser));
@@ -78,6 +81,10 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
                 compraPresenter.confirmar(String.valueOf(idUser));
                 makeNotifiation();
                 Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                intent.putExtra("idSala", idsala);
+                intent.putExtra("idObra", idobra);
+
+                intent.putExtra("idUser", idUser);
                 startActivity(intent);
 
             }

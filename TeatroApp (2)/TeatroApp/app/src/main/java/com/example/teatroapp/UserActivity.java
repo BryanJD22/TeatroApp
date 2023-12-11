@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.example.teatroapp.Adapter.AdapterObras;
 import com.example.teatroapp.Adapter.CategoriasAdapter;
 import com.example.teatroapp.Adapter.UObrasAdapter;
 import com.example.teatroapp.Categorias.CategoriaContract;
@@ -21,7 +25,8 @@ import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity implements ObraContract.View, CategoriaContract.View {
 
-    private RecyclerView.Adapter adapterTopVentas, adapterTopPopular, adapterAll, adapterCategoria;
+    private RecyclerView.Adapter adapterTopVentas, adapterTopPopular, adapterAll, adapterCategoria,
+            adapterObras;
     private ProgressBar loading1, loading2, loading3, loading4;
     private RecyclerView recyclerViewTopVentas, recyclerViewTopPopular, recyclerViewAll,recyclerViewCategoria;
 
@@ -36,7 +41,11 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
 
     private CategoriaActivity categoriaView;
 
+    private EditText titulo;
+    ImageView searchIcon;
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +71,19 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
 
         lstCategoriasPresenter.getCategoria();
         sucessListCategorias(lstCategorias);
+
+        searchIcon = findViewById(R.id.buscador);
+        titulo = findViewById(R.id.editTextText2);
+
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchQuery = titulo.getText().toString();
+                lstObrasPresenter.getObraPorTitulo(searchQuery);
+            }
+
+        });
+
 
 
 
@@ -121,6 +143,18 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
 
         adapterAll = new UObrasAdapter(lstObras,idUser);
         recyclerViewAll.setAdapter(adapterAll);
+
+    }
+
+    @Override
+    public void sucessObraPorTitulo(ArrayList<Obra> lstObras) {
+
+        this.lstobras = lstObras;
+        RecyclerView recyclerView = findViewById(R.id.recyclerObras);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        adapterObras = new AdapterObras(this,lstObras);
+        recyclerView.setAdapter(adapterObras);
 
     }
 

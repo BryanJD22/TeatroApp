@@ -10,6 +10,9 @@ public interface ObraContract {
     public interface View{
         void sucessListObras(ArrayList<Obra> lstObras);
 
+        void sucessObraPorTitulo(ArrayList<Obra> lstObras);
+
+
         void sendRequestTopVentas(ArrayList<Obra> lstObras);
         void sendRequestTopPopular(ArrayList<Obra> lstObras);
 
@@ -28,6 +31,8 @@ public interface ObraContract {
         /*Programación Reactiva*/
         interface OnLstObrasListener{
             void onFinished(ArrayList<Obra> lstObras);
+
+            public void obraportitulo(ArrayList<Obra> lstObras);
 
             void onFailure(String error);
         }

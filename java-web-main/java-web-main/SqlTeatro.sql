@@ -51,11 +51,14 @@ CREATE TABLE compra (
     id_compra INT AUTO_INCREMENT PRIMARY KEY,
     fecha_compra DATE,
     id_usuario INT,
+    id_obra_sala INT,
     cantidad INT,
     confirmada TINYINT ,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_obra_sala) REFERENCES obra_sala(id_obra_sala)
+
 );
 
 -- Tabla Valoracion

@@ -149,16 +149,28 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
         try{
             motosSql.conectar();
             int idCompraActual = 0;
+            int totalCantidad = 0;
             String destinatario = "";
 
             ResultSet rsCompra = motosSql.consultar("SELECT id_compra FROM compra WHERE id_usuario = "+id_usuario+" AND confirmada = 0");
             while(rsCompra.next()){
                 idCompraActual = rsCompra.getInt("id_compra");
             }
+            // Obtener la cantidad total sumada
+            ResultSet rsTotalCantidad = motosSql.consultar("SELECT SUM(o.precio * crt.cantidad) AS total_cantidad " +
+                    "FROM compra c " +
+                    "JOIN carrito crt ON c.id_compra = crt.id_compra " +
+                    "JOIN obra_sala os ON crt.id_obra_sala = os.id_obra_sala " +
+                    "JOIN obra o ON os.id_obra = o.id_obra " +
+                    "WHERE c.id_usuario = " + id_usuario + " AND c.confirmada = 0");
+            while (rsTotalCantidad.next()) {
+                totalCantidad = rsTotalCantidad.getInt("total_cantidad");
+            }
 
-            //Modificamos la compra para dejarla confirmada.
-            String sql = "UPDATE compra SET confirmada = 1, fecha_compra = current_date() WHERE id_compra = "+idCompraActual;
+            // Modificamos la compra para dejarla confirmada.
+            String sql = "UPDATE compra SET confirmada = 1, fecha_compra = current_date(), cantidad = " + totalCantidad + " WHERE id_compra = " + idCompraActual;
             respuesta += motosSql.modificar(sql);
+
             //Añadimos al usuario la nueva compra.
             respuesta += motosSql.modificar("INSERT INTO compra(id_usuario, confirmada) VALUES ("+id_usuario+", 0)");
 

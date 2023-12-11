@@ -41,8 +41,21 @@ public class  ObraAction implements IAction{
             case "FINDBY_ID":
                 pagDestino = findbyid(request,response);
                 break;
+            case "FINDBY_TITULO":
+                pagDestino = findbyTitulo(request,response);
+                break;
         }
         return pagDestino;
+    }
+
+    private String findbyTitulo(HttpServletRequest request, HttpServletResponse response) {
+        ObraDAO obraDAO = new ObraDAO();
+
+        String tituloObra= request.getParameter("TITULO");
+
+       ArrayList<Obra> obra =  obraDAO.obraPorTitulo(tituloObra);
+
+        return Obra.toArrayJson(obra);
     }
 
     private String findbyid(HttpServletRequest request, HttpServletResponse response) {

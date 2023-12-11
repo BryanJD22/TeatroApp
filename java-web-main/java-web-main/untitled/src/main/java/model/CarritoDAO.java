@@ -22,7 +22,27 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
     @Override
     public int add(Carrito bean)  {
         int resp=0;
+        int delete;
+
         motosSql.conectar();
+        String checkCarritoSql = "SELECT COUNT(*) AS count FROM carrito WHERE id_usuario = " + bean.getIdUsuario();
+        ResultSet checkResult = motosSql.consultar(checkCarritoSql);
+
+        try {
+            if (checkResult.next()) {
+                int itemCount = checkResult.getInt("count");
+
+                if (itemCount > 0) {
+                    // Hay elementos en el carrito, eliminarlos
+                    String deleteCarritoSql = "DELETE FROM carrito WHERE id_usuario = " + bean.getIdUsuario();
+                    System.out.println(deleteCarritoSql);
+                    delete = motosSql.modificar(deleteCarritoSql);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         String sql2 = "SELECT id_compra\n" +
                 "FROM compra\n" +
                 "WHERE id_usuario = " + bean.getIdUsuario() +

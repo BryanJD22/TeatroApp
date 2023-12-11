@@ -212,9 +212,12 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
             }
 
             // Modificamos la compra para dejarla confirmada.
-            String sql = "UPDATE compra SET confirmada = 1, fecha_compra = current_date(), cantidad = " + totalCantidad + ", id_obra_sala = crt.id_obra_sala " +
-                    "FROM carrito crt " +
-                    "WHERE compra.id_compra = crt.id_compra AND compra.id_usuario = " + id_usuario + " AND compra.confirmada = 0";
+            String sql = "UPDATE compra crt " +
+                    "JOIN carrito c ON crt.id_compra = c.id_compra " +
+                    "SET crt.confirmada = 1, crt.fecha_compra = current_date(), crt.cantidad = "+totalCantidad+", crt.id_obra_sala = c.id_obra_sala " +
+                    "WHERE crt.id_usuario = "+id_usuario+" AND crt.confirmada = 0";
+
+            System.out.println(sql);
             respuesta += motosSql.modificar(sql);
 
             //Añadimos al usuario la nueva compra.

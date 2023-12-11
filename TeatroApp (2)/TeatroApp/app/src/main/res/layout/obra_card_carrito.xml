@@ -92,7 +92,6 @@
                 android:layout_marginStart="124dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@+id/Cdesc"
                 android:gravity="left"
                 android:orientation="vertical"
                 android:paddingTop="10dp"

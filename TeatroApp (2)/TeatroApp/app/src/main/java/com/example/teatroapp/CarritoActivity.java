@@ -88,7 +88,7 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
                 Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                 intent.putExtra("idSala", idsala);
                 intent.putExtra("idObra", idobra);
-
+                intent.putExtra("idObraSala", idOObraSala);
                 intent.putExtra("idUser", idUser);
                 startActivity(intent);
 
@@ -118,6 +118,7 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
 
     @Override
     public void confirmado(Confirm confirm) {
+        makeNotifiation();
 
     }
 

@@ -107,7 +107,7 @@ public class CarritoAction implements IAction{
             // Llamar al método add en el DAO
             int respuesta = carritoDAO.add(carrito);
 
-            if (respuesta > 0) {
+            if (respuesta == 0) {
                 // Éxito al agregar al carrito
                 return "Carrito actualizado con éxito";
             } else {

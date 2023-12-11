@@ -234,6 +234,8 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
     }
 
     public void agregarAlCarrito(ObraSala obraSala) {
+        
+        compraPresenter.loadCarrito(String.valueOf(idUser));
         // Lógica para añadir al carrito aquí
         // Puedes utilizar el objeto compraPresenter para llamar a un método que maneje la adición al carrito
         compraPresenter.agregarAlCarrito(String.valueOf(idUser), String.valueOf(obraSala.getIdObraSala()), "1"); // 1 es la cantidad, ajusta según sea necesario

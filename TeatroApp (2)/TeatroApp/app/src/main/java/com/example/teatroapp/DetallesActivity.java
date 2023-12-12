@@ -173,7 +173,7 @@ public class DetallesActivity extends AppCompatActivity implements ValorarContra
         if (lstcategoria != null) {
             this.lstCategorias = lstcategoria;
             recyclerViewCategorias = findViewById(R.id.categoriaDetalles);
-            adaptercategorias = new CategoriasAdapter(lstcategoria);
+            adaptercategorias = new CategoriasAdapter(lstcategoria,idUser);
             recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
             // Asegúrate de que recyclerViewCategorias se haya inicializado correctamente antes de usarlo

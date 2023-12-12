@@ -26,10 +26,12 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
     private ArrayList<Obra> lstObras;
     private LayoutInflater inflater;
     int idObra;
+    int id_user;
 
-    public AdapterObras(Context context, ArrayList<Obra> lstObras){
+    public AdapterObras(Context context, ArrayList<Obra> lstObras, int id_user){
         this.lstObras = lstObras;
         this.inflater = LayoutInflater.from(context);
+        this.id_user = id_user;
     }
 
     //MÉTODOS
@@ -61,6 +63,7 @@ public class AdapterObras extends RecyclerView.Adapter<AdapterObras.ObrasViewHol
         holder.itemView.setOnClickListener(e->{
             Intent intent = new Intent(holder.itemView.getContext(), DetallesActivity.class);
             intent.putExtra("idObra", lstObras.get(posfila).getIdObra());
+            intent.putExtra("idUser", id_user);
             intent.putExtra("sourceAdapter", "AdapterObras");
             context.startActivity(intent);
         });

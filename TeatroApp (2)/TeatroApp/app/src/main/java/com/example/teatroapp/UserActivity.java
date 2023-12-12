@@ -153,7 +153,7 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
         RecyclerView recyclerView = findViewById(R.id.recyclerObras);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
-        adapterObras = new AdapterObras(this,lstObras);
+        adapterObras = new AdapterObras(this,lstObras, idUser);
         recyclerView.setAdapter(adapterObras);
 
     }
@@ -170,7 +170,7 @@ public class UserActivity extends AppCompatActivity implements ObraContract.View
         recyclerViewCategoria = findViewById(R.id.lstCategorias);
         loading4.setVisibility(View.GONE);
 
-        adapterCategoria = new CategoriasAdapter(lstcategoria);
+        adapterCategoria = new CategoriasAdapter(lstcategoria, idUser);
         recyclerViewCategoria.setAdapter(adapterCategoria);
     }
 

@@ -21,9 +21,11 @@ import java.util.ArrayList;
 public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.ViewHolder> {
     ArrayList<Categoria> listCategorias;
     Context context;
+    int id_user;
 
-    public CategoriasAdapter(ArrayList<Categoria> listCategorias) {
+    public CategoriasAdapter(ArrayList<Categoria> listCategorias, int id_user) {
         this.listCategorias = listCategorias;
+        this.id_user = id_user;
     }
 
     @NonNull
@@ -44,6 +46,7 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Vi
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ObrasActivity.class);
             intent.putExtra("categoria", categoria.getNombre_categoria());
+            intent.putExtra("id_user", id_user);
             context.startActivity(intent);
 
         });

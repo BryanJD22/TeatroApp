@@ -30,6 +30,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
     private ObraPresenter lstObrasPresenter;
     private ImageView backimg;
     private CategoriaPresenter lstCategoriaPresenter;
+    int id_user;
 
     private ArrayList<Obra> lstObras;
 
@@ -64,6 +65,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
         } else if(intent.hasExtra("categoria")){
 
             String categoria = intent.getStringExtra("categoria");
+            id_user = intent.getIntExtra("id_user",0);
             lstCategoriaPresenter.getObrasPorCategoria(categoria);
 
             agregarbtn = findViewById(R.id.addbtnObras);
@@ -98,7 +100,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
         RecyclerView recyclerView = findViewById(R.id.recyclerObras);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
-        adapterObras = new AdapterObras(this,lstObras);
+        adapterObras = new AdapterObras(this,lstObras,id_user);
         recyclerView.setAdapter(adapterObras);
 
     }
@@ -139,7 +141,7 @@ public class ObrasActivity extends AppCompatActivity implements ObraContract.Vie
         RecyclerView recyclerView = findViewById(R.id.recyclerObras);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
-        adapterObras = new AdapterObras(this,lstObras);
+        adapterObras = new AdapterObras(this,lstObras,id_user);
         recyclerView.setAdapter(adapterObras);
 
     }

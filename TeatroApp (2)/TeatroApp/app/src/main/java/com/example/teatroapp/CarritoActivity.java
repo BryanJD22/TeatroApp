@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -19,6 +20,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.teatroapp.Adapter.AdaptarCarrito;
 import com.example.teatroapp.Adapter.AdapterHistorial;
@@ -44,9 +46,13 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
 
     ArrayList<Carrito> carritoHistorial;
     CompraPresenter compraPresenter;
+
+    private ImageView backImg;
+
     private RecyclerView recyclerViewCarrito, recyclerViewCarritoHistorial;
     private RecyclerView.Adapter adapterCarrito, adapterHistorial;
     Button confirmarCompra;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +102,8 @@ public class CarritoActivity extends AppCompatActivity implements CompraContract
         });
 
 
-
+        backImg = findViewById(R.id.backImgCarrito);
+        backImg.setOnClickListener(view -> finish());
 
     }
 

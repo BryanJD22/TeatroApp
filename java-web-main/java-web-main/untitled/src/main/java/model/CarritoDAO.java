@@ -207,6 +207,7 @@ public class CarritoDAO implements DAO<Carrito,Integer> {
                     "JOIN obra_sala os ON crt.id_obra_sala = os.id_obra_sala " +
                     "JOIN obra o ON os.id_obra = o.id_obra " +
                     "WHERE c.id_usuario = " + id_usuario + " AND c.confirmada = 0");
+            //System.out.println(rsTotalCantidad);
             while (rsTotalCantidad.next()) {
                 totalCantidad = rsTotalCantidad.getInt("total_cantidad");
             }
